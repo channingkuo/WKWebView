@@ -8,27 +8,28 @@
 import UIKit
 import WebKit
 
-class KWKWebView: WKWebView, WKNavigationDelegate {
+class KWKWebView: WKWebView, WKUIDelegate, WKNavigationDelegate {
     
     init(frame: CGRect) {
-        super.init(frame: frame, configuration: WKWebViewConfiguration.init())
+        let config = WKWebViewConfiguration()
+        config.userContentController = .init()
+        config.preferences.javaScriptEnabled = true
+        config.suppressesIncrementalRendering = true
+        config.preferences.setValue(true, forKey: "allowFileAccessFromFileURLs")
+        super.init(frame: frame, configuration: config)
         
-        self.frame = frame
         self.navigationDelegate = self
-                
-//        let htmlFilePathURL = Bundle.main
+        
         let wwwBundleURL = Bundle.main.url(forResource: "www", withExtension: "bundle")!
         let htmlURL = wwwBundleURL.appendingPathComponent("www", isDirectory: true)
-        let htmlFileURL = URL(fileURLWithPath: htmlURL.path + "/index.html")
-        print(htmlURL.path)
-        print(htmlFileURL.path)
+        let htmlFileURL = URL(fileURLWithPath: htmlURL.path + "/index1.html")
+//        print(htmlURL.path)
+//        print(htmlFileURL.path)
         self.loadFileURL(htmlFileURL, allowingReadAccessTo: htmlURL)
     }
     
     init(frame: CGRect, url: String) {
         super.init(frame: frame, configuration: WKWebViewConfiguration.init())
-        
-        self.frame = frame
         
         self.load(URLRequest(url: URL(string: url)!))
     }
@@ -55,7 +56,5 @@ class KWKWebView: WKWebView, WKNavigationDelegate {
     
     func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
         print("进程被终止")
-        print(webView.url)
-        
     }
 }
