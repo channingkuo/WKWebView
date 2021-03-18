@@ -30,7 +30,7 @@ class KWKWebView: UIView {
     fileprivate var firstLoad: Bool?
     
     /// WebView配置项
-    var webConfig : KWKWebViewConfig?
+    var webConfig: KWKWebViewConfig?
     
     /// TODO 设计一个Class保存请求的所有记录
     fileprivate var snapShotsArray: Array<Any>?
@@ -86,38 +86,27 @@ class KWKWebView: UIView {
         buildInterface(webConfig: webConfig ?? KWKWebViewConfig())
         
         switch kWKWebLoadType {
-        case .HTML(let name):
-            loadLocalHTML(fileName: name)
+        case .HTML(let fileName):
+            loadLocalHTML(fileName: fileName)
+            break
         case .URL(let urlString):
             let url = URL(string: urlString)
             let request = URLRequest(url: url!)
             
             webView.load(request)
-        case .POST(let url, parameters: let jsonString): break
+            break
+        case .POST(let url, parameters: let jsonString):
             print(url)
             print(jsonString)
+            break
         }
     }
     
-    fileprivate func loadLocalHTML(fileName: String) {
+    fileprivate func loadLocalHTML(fileName: String?) {
         let wwwBundleURL = Bundle.main.url(forResource: "www", withExtension: "bundle")!
         let htmlURL = wwwBundleURL.appendingPathComponent("www", isDirectory: true)
-        let htmlFileURL = URL(fileURLWithPath: htmlURL.path + "/index.html")
-
-        do {
-            let html = try String(contentsOfFile: htmlFileURL.path, encoding: String.Encoding.utf8)
-
-//            webView.loadHTMLString(html, baseURL: Bundle.main.bundleURL)
-            webView.loadFileURL(htmlFileURL, allowingReadAccessTo: htmlURL)
-        } catch { }
-        
-//        let path = Bundle.main.path(forResource: fileName, ofType: "html")
-//        // 获得html内容
-//        do {
-//            let html = try String(contentsOfFile: path!, encoding: String.Encoding.utf8)
-//            // 加载js
-//            webView.loadHTMLString(html, baseURL: Bundle.main.bundleURL)
-//        } catch { }
+        let htmlFileURL = URL(fileURLWithPath: htmlURL.path + "/\(fileName ?? "index").html")
+        webView.loadFileURL(htmlFileURL, allowingReadAccessTo: htmlURL)
     }
 }
 

@@ -47,8 +47,8 @@ enum KWKWebLoadType{
     /// 加载普通URL
     case URL(url: String)
     
-    /// 加载本地HTML(传名字就可以了)
-    case HTML(name: String)
+    /// 加载本地HTML index.html
+    case HTML(fileName: String?)
     
     /// 加载POST请求(url:请求URL，parameters：请求参数)
     case POST(url: String, parameters: [String:Any])
