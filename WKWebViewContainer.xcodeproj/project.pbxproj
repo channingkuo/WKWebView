@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		D70BEF9B253949CA0020FB30 /* KWKWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70BEF9A253949CA0020FB30 /* KWKWebView.swift */; };
 		D70BEFA02539507F0020FB30 /* FileUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70BEF9F2539507F0020FB30 /* FileUtils.swift */; };
-		D70BEFB22539611B0020FB30 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = D70BEFB12539611B0020FB30 /* SwiftyJSON */; };
 		D748442325384C5600BFF55A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D748442225384C5600BFF55A /* AppDelegate.swift */; };
 		D748442525384C5600BFF55A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D748442425384C5600BFF55A /* SceneDelegate.swift */; };
 		D748442725384C5600BFF55A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D748442625384C5600BFF55A /* ViewController.swift */; };
@@ -17,8 +16,12 @@
 		D748442D25384C5600BFF55A /* WKWebViewContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D748442B25384C5600BFF55A /* WKWebViewContainer.xcdatamodeld */; };
 		D748442F25384C5A00BFF55A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D748442E25384C5A00BFF55A /* Assets.xcassets */; };
 		D748443225384C5A00BFF55A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D748443025384C5A00BFF55A /* LaunchScreen.storyboard */; };
-		D7B9481B25396A5700CF33A6 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = D7B9481A25396A5700CF33A6 /* Zip */; };
+		D796800E2602F4B800731902 /* Extension+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D796800D2602F4B800731902 /* Extension+UIView.swift */; };
+		D79680122602FAE500731902 /* KWKWebViewConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79680112602FAE500731902 /* KWKWebViewConfig.swift */; };
+		D796801626031D5500731902 /* KWKWebViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D796801526031D5500731902 /* KWKWebViewDelegate.swift */; };
 		D7B948242539713500CF33A6 /* www.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D7B948232539713500CF33A6 /* www.bundle */; };
+		D7E1B5492601D7B10074794D /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = D7E1B5482601D7B10074794D /* SwiftyJSON */; };
+		D7E1B54D2601D7E90074794D /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = D7E1B54C2601D7E90074794D /* Zip */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +36,9 @@
 		D748442E25384C5A00BFF55A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D748443125384C5A00BFF55A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D748443325384C5A00BFF55A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D796800D2602F4B800731902 /* Extension+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIView.swift"; sourceTree = "<group>"; };
+		D79680112602FAE500731902 /* KWKWebViewConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KWKWebViewConfig.swift; sourceTree = "<group>"; };
+		D796801526031D5500731902 /* KWKWebViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KWKWebViewDelegate.swift; sourceTree = "<group>"; };
 		D7B948232539713500CF33A6 /* www.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = www.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -41,8 +47,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D7B9481B25396A5700CF33A6 /* Zip in Frameworks */,
-				D70BEFB22539611B0020FB30 /* SwiftyJSON in Frameworks */,
+				D7E1B54D2601D7E90074794D /* Zip in Frameworks */,
+				D7E1B5492601D7B10074794D /* SwiftyJSON in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,10 +79,13 @@
 				D748443025384C5A00BFF55A /* LaunchScreen.storyboard */,
 				D748442825384C5600BFF55A /* Main.storyboard */,
 				D748442225384C5600BFF55A /* AppDelegate.swift */,
+				D796800D2602F4B800731902 /* Extension+UIView.swift */,
+				D70BEF9F2539507F0020FB30 /* FileUtils.swift */,
 				D748442425384C5600BFF55A /* SceneDelegate.swift */,
 				D748442625384C5600BFF55A /* ViewController.swift */,
 				D70BEF9A253949CA0020FB30 /* KWKWebView.swift */,
-				D70BEF9F2539507F0020FB30 /* FileUtils.swift */,
+				D79680112602FAE500731902 /* KWKWebViewConfig.swift */,
+				D796801526031D5500731902 /* KWKWebViewDelegate.swift */,
 				D748443325384C5A00BFF55A /* Info.plist */,
 				D748442B25384C5600BFF55A /* WKWebViewContainer.xcdatamodeld */,
 			);
@@ -100,8 +109,8 @@
 			);
 			name = WKWebViewContainer;
 			packageProductDependencies = (
-				D70BEFB12539611B0020FB30 /* SwiftyJSON */,
-				D7B9481A25396A5700CF33A6 /* Zip */,
+				D7E1B5482601D7B10074794D /* SwiftyJSON */,
+				D7E1B54C2601D7E90074794D /* Zip */,
 			);
 			productName = WKWebViewContainer;
 			productReference = D748441F25384C5600BFF55A /* WKWebViewContainer.app */;
@@ -114,7 +123,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1200;
-				LastUpgradeCheck = 1200;
+				LastUpgradeCheck = 1240;
 				TargetAttributes = {
 					D748441E25384C5600BFF55A = {
 						CreatedOnToolsVersion = 12.0.1;
@@ -131,8 +140,8 @@
 			);
 			mainGroup = D748441625384C5600BFF55A;
 			packageReferences = (
-				D70BEFB02539611B0020FB30 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
-				D7B9481925396A5700CF33A6 /* XCRemoteSwiftPackageReference "Zip" */,
+				D7E1B5472601D7B10074794D /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				D7E1B54B2601D7E90074794D /* XCRemoteSwiftPackageReference "Zip" */,
 			);
 			productRefGroup = D748442025384C5600BFF55A /* Products */;
 			projectDirPath = "";
@@ -162,10 +171,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D796800E2602F4B800731902 /* Extension+UIView.swift in Sources */,
 				D748442725384C5600BFF55A /* ViewController.swift in Sources */,
+				D796801626031D5500731902 /* KWKWebViewDelegate.swift in Sources */,
 				D748442D25384C5600BFF55A /* WKWebViewContainer.xcdatamodeld in Sources */,
 				D748442325384C5600BFF55A /* AppDelegate.swift in Sources */,
 				D70BEFA02539507F0020FB30 /* FileUtils.swift in Sources */,
+				D79680122602FAE500731902 /* KWKWebViewConfig.swift in Sources */,
 				D70BEF9B253949CA0020FB30 /* KWKWebView.swift in Sources */,
 				D748442525384C5600BFF55A /* SceneDelegate.swift in Sources */,
 			);
@@ -244,7 +256,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -299,7 +311,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -373,17 +385,17 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		D70BEFB02539611B0020FB30 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+		D7E1B5472601D7B10074794D /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON.git";
+			repositoryURL = "https://gitee.com/channingk/SwiftyJSON.git";
 			requirement = {
 				kind = exactVersion;
 				version = 5.0.0;
 			};
 		};
-		D7B9481925396A5700CF33A6 /* XCRemoteSwiftPackageReference "Zip" */ = {
+		D7E1B54B2601D7E90074794D /* XCRemoteSwiftPackageReference "Zip" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/marmelroy/Zip.git";
+			repositoryURL = "https://gitee.com/channingk/Zip.git";
 			requirement = {
 				kind = exactVersion;
 				version = 2.1.1;
@@ -392,14 +404,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		D70BEFB12539611B0020FB30 /* SwiftyJSON */ = {
+		D7E1B5482601D7B10074794D /* SwiftyJSON */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D70BEFB02539611B0020FB30 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			package = D7E1B5472601D7B10074794D /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
 			productName = SwiftyJSON;
 		};
-		D7B9481A25396A5700CF33A6 /* Zip */ = {
+		D7E1B54C2601D7E90074794D /* Zip */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D7B9481925396A5700CF33A6 /* XCRemoteSwiftPackageReference "Zip" */;
+			package = D7E1B54B2601D7E90074794D /* XCRemoteSwiftPackageReference "Zip" */;
 			productName = Zip;
 		};
 /* End XCSwiftPackageProductDependency section */

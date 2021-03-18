@@ -10,14 +10,23 @@ import WebKit
 
 class ViewController: UIViewController {
     
-    fileprivate var kWKWebView: KWKWebView!
+    @IBOutlet weak var kWKWebView: KWKWebView!
+//    fileprivate var kWKWebView: KWKWebView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        kWKWebView = KWKWebView(frame: self.view.frame)
-        self.view.addSubview(kWKWebView)
+        var config = KWKWebViewConfig()
+        config.isShowScrollIndicator = false
+        config.isProgressHidden = false
+        
+//        kWKWebView.load(self, .URL(url: "https://www.baidu.com"))
+        
+        config.scriptMessageHandlerArray = ["kWKWebView"]
+        kWKWebView.webConfig = config
+        
+        kWKWebView.load(self, .HTML(name: "test"))
     }
 
     override func viewWillAppear(_ animated: Bool) {

@@ -3,7 +3,7 @@
     "pins": [
       {
         "package": "SwiftyJSON",
-        "repositoryURL": "https://github.com/SwiftyJSON/SwiftyJSON.git",
+        "repositoryURL": "https://gitee.com/channingk/SwiftyJSON.git",
         "state": {
           "branch": null,
           "revision": "2b6054efa051565954e1d2b9da831680026cd768",
@@ -12,7 +12,7 @@
       },
       {
         "package": "Zip",
-        "repositoryURL": "https://github.com/marmelroy/Zip.git",
+        "repositoryURL": "https://gitee.com/channingk/Zip.git",
         "state": {
           "branch": null,
           "revision": "bd19d974e8a38cc8d3a88c90c8a107386c3b8ccf",
