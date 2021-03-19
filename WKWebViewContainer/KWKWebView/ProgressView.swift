@@ -12,6 +12,7 @@ class ProgressView: UIView {
     
     override public init(frame: CGRect) {
         super.init(frame: frame)
+        
     }
     
     required init?(coder: NSCoder) {
@@ -21,6 +22,21 @@ class ProgressView: UIView {
     open override func layoutSubviews() {
         super.layoutSubviews()
         
-        // TODO 设置loading
+        for view in self.subviews {
+            if view is UIImageView {
+                let animation = CABasicAnimation(keyPath: "transform.scale")
+                animation.fromValue = 1
+                animation.toValue = 0
+                animation.timingFunction = CAMediaTimingFunction(
+                    name: CAMediaTimingFunctionName(rawValue: "easeInEaseOut")
+                )
+                animation.repeatCount = 1
+                animation.duration = 0.7
+                animation.isRemovedOnCompletion = true
+                animation.fillMode = .forwards
+                // add animation into layer
+                view.layer.add(animation, forKey: nil)
+            }
+        }
     }
 }

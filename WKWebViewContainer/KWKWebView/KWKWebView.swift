@@ -17,23 +17,14 @@ class KWKWebView: UIView {
     /// WKWebView 加载HTML
     fileprivate var webView = WKWebView()
     
-    /// 进度条
-//    fileprivate var progressView = UIProgressView()
-    
     /// WKWebView配置项
     fileprivate let configuretion = WKWebViewConfiguration()
     
-    /// 执行JS 需要实现代理方法
-    fileprivate var excuteJavaScript = String()
-    
     /// 是否是第一次加载
-    fileprivate var firstLoad: Bool?
+    fileprivate var firstLoad: Bool = true
     
     /// WebView配置项
     var webConfig: KWKWebViewConfig?
-    
-    /// TODO 设计一个Class保存请求的所有记录
-    fileprivate var snapShotsArray: Array<Any>?
     
     /// 设置代理
     weak var delegate: WKWebViewDelegate?
@@ -64,6 +55,8 @@ class KWKWebView: UIView {
         _ = webConfig.scriptMessageHandlerArray.map{configuretion.userContentController.add(self, name: $0)}
         
         webView = WKWebView(frame: frame, configuration: configuretion)
+        // 禁止WKWebView下拉回弹
+        webView.scrollView.bounces = false
         
         // 开启手势交互
         webView.allowsBackForwardNavigationGestures = webConfig.isAllowsBackForwardGestures
@@ -105,6 +98,15 @@ class KWKWebView: UIView {
         }
     }
     
+    func excuteJavaScript(javaScript script: String?) {
+        if let script = script {
+            webView.evaluateJavaScript(script) { result, error in
+                print(error ?? "")
+                self.delegate?.webViewEvaluateJavaScript(result, error: error)
+            }
+        }
+    }
+    
     fileprivate func loadLocalHTML(fileName: String?) {
         let wwwBundleURL = Bundle.main.url(forResource: "www", withExtension: "bundle")!
         let htmlURL = wwwBundleURL.appendingPathComponent("www", isDirectory: true)
@@ -132,24 +134,28 @@ extension KWKWebView: WKScriptMessageHandler {
 // MARK: - WKNavigationDelegate
 extension KWKWebView: WKNavigationDelegate {
     
-    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        print("开始加载...")
+    /// 服务器开始请求的时候调用
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        self.delegate?.webView(webView, decidePolicyFor: navigationAction, decisionHandler: decisionHandler)
     }
     
-    func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
-        print("内容开始返回...")
+    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        self.delegate?.webView(webView, didStartProvisionalNavigation: navigation)
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        print("加载完成!")
+        if firstLoad {
+            firstLoad = false
+        }
+        self.delegate?.webView(webView, didFinish: navigation)
+    }
+    
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        self.delegate?.webView(webView, didFail: navigation, withError: error)
     }
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        print("加载失败 error:" + error.localizedDescription)
-    }
-    
-    func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
-        print("进程被终止")
+        self.delegate?.webView(webView, didFailProvisionalNavigation: navigation, withError: error)
     }
 }
 

@@ -28,7 +28,16 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5az-SK-1Ki" customClass="ProgressView" customModule="KWKWebView" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <color key="backgroundColor" red="0.94901960784313721" green="0.88235294117647056" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchScreen" translatesAutoresizingMaskIntoConstraints="NO" id="If7-Pf-z8q">
+                                        <rect key="frame" x="107" y="348" width="200" height="200"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.94901960780000005" green="0.88235294119999996" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstItem="If7-Pf-z8q" firstAttribute="centerY" secondItem="5az-SK-1Ki" secondAttribute="centerY" id="HfK-18-Y1F"/>
+                                    <constraint firstItem="If7-Pf-z8q" firstAttribute="centerX" secondItem="5az-SK-1Ki" secondAttribute="centerX" id="Nrb-xH-4pg"/>
+                                </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="zPosition">
                                         <real key="value" value="100"/>
@@ -77,6 +86,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="LaunchScreen" width="200" height="200"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
