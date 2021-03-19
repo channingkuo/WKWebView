@@ -17,24 +17,37 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        self.navigationController?.navigationBar.isHidden = true
+        
         var config = KWKWebViewConfig()
         config.isShowScrollIndicator = false
         config.isProgressHidden = false
         
         kWKWebView.delegate = self
+        kWKWebView.progressDelegate = self
         
-//        kWKWebView.load(self, .URL(url: "https://www.baidu.com"))
+//        kWKWebView.load(self, .URL(url: "https://baidu.com"))
         
         config.scriptMessageHandlerArray = ["kWKWebView"]
         kWKWebView.webConfig = config
         
         kWKWebView.load(self, .HTML(fileName: nil))
-        progressView.removeFromSuperview()
+//        self.navigationController?.pushViewController(SettingViewController(), animated: true)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+    }
+}
+
+// MARK: - ProgressDelegate
+extension ViewController: ProgressDelegate {
+    
+    func estimatedProgress(_ webView: WKWebView, estimatedProgress progress: Double) {
+        if progress >= 1.0 {
+            progressView.removeFromSuperview()
+        }
     }
 }
 

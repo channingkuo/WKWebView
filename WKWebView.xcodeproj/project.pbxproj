@@ -7,15 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D7089F6B260477BD00495322 /* ProgressDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7089F6A260477BD00495322 /* ProgressDelegate.swift */; };
 		D70BEF9B253949CA0020FB30 /* KWKWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70BEF9A253949CA0020FB30 /* KWKWebView.swift */; };
 		D70BEFA02539507F0020FB30 /* FileUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70BEF9F2539507F0020FB30 /* FileUtils.swift */; };
 		D748442325384C5600BFF55A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D748442225384C5600BFF55A /* AppDelegate.swift */; };
 		D748442525384C5600BFF55A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D748442425384C5600BFF55A /* SceneDelegate.swift */; };
 		D748442725384C5600BFF55A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D748442625384C5600BFF55A /* ViewController.swift */; };
 		D748442A25384C5600BFF55A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D748442825384C5600BFF55A /* Main.storyboard */; };
-		D748442D25384C5600BFF55A /* WKWebViewContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D748442B25384C5600BFF55A /* WKWebViewContainer.xcdatamodeld */; };
+		D748442D25384C5600BFF55A /* WKWebView.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D748442B25384C5600BFF55A /* WKWebView.xcdatamodeld */; };
 		D748442F25384C5A00BFF55A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D748442E25384C5A00BFF55A /* Assets.xcassets */; };
 		D748443225384C5A00BFF55A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D748443025384C5A00BFF55A /* LaunchScreen.storyboard */; };
+		D75B8C122603455C008F2122 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75B8C112603455C008F2122 /* SettingViewController.swift */; };
 		D796800E2602F4B800731902 /* Extension+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D796800D2602F4B800731902 /* Extension+UIView.swift */; };
 		D79680122602FAE500731902 /* KWKWebViewConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79680112602FAE500731902 /* KWKWebViewConfig.swift */; };
 		D796801626031D5500731902 /* KWKWebViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D796801526031D5500731902 /* KWKWebViewDelegate.swift */; };
@@ -26,9 +28,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D7089F6A260477BD00495322 /* ProgressDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressDelegate.swift; sourceTree = "<group>"; };
 		D70BEF9A253949CA0020FB30 /* KWKWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KWKWebView.swift; sourceTree = "<group>"; };
 		D70BEF9F2539507F0020FB30 /* FileUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileUtils.swift; sourceTree = "<group>"; };
-		D748441F25384C5600BFF55A /* WKWebViewContainer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WKWebViewContainer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D748441F25384C5600BFF55A /* KWKWebView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KWKWebView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D748442225384C5600BFF55A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D748442425384C5600BFF55A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		D748442625384C5600BFF55A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -37,6 +40,7 @@
 		D748442E25384C5A00BFF55A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D748443125384C5A00BFF55A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D748443325384C5A00BFF55A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D75B8C112603455C008F2122 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		D796800D2602F4B800731902 /* Extension+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIView.swift"; sourceTree = "<group>"; };
 		D79680112602FAE500731902 /* KWKWebViewConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KWKWebViewConfig.swift; sourceTree = "<group>"; };
 		D796801526031D5500731902 /* KWKWebViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KWKWebViewDelegate.swift; sourceTree = "<group>"; };
@@ -68,7 +72,7 @@
 		D748442025384C5600BFF55A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D748441F25384C5600BFF55A /* WKWebViewContainer.app */,
+				D748441F25384C5600BFF55A /* KWKWebView.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -84,7 +88,7 @@
 				D748443025384C5A00BFF55A /* LaunchScreen.storyboard */,
 				D748442825384C5600BFF55A /* Main.storyboard */,
 				D748443325384C5A00BFF55A /* Info.plist */,
-				D748442B25384C5600BFF55A /* WKWebViewContainer.xcdatamodeld */,
+				D748442B25384C5600BFF55A /* WKWebView.xcdatamodeld */,
 				D748442E25384C5A00BFF55A /* Assets.xcassets */,
 				D7B948232539713500CF33A6 /* www.bundle */,
 			);
@@ -98,6 +102,8 @@
 				D79680112602FAE500731902 /* KWKWebViewConfig.swift */,
 				D796801526031D5500731902 /* KWKWebViewDelegate.swift */,
 				D796801E26032C4400731902 /* ProgressView.swift */,
+				D7089F6A260477BD00495322 /* ProgressDelegate.swift */,
+				D75B8C112603455C008F2122 /* SettingViewController.swift */,
 			);
 			path = KWKWebView;
 			sourceTree = "<group>";
@@ -114,9 +120,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D748441E25384C5600BFF55A /* WKWebViewContainer */ = {
+		D748441E25384C5600BFF55A /* KWKWebView */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D748444C25384C5B00BFF55A /* Build configuration list for PBXNativeTarget "WKWebViewContainer" */;
+			buildConfigurationList = D748444C25384C5B00BFF55A /* Build configuration list for PBXNativeTarget "KWKWebView" */;
 			buildPhases = (
 				D748441B25384C5600BFF55A /* Sources */,
 				D748441C25384C5600BFF55A /* Frameworks */,
@@ -126,13 +132,13 @@
 			);
 			dependencies = (
 			);
-			name = WKWebViewContainer;
+			name = KWKWebView;
 			packageProductDependencies = (
 				D7E1B5482601D7B10074794D /* SwiftyJSON */,
 				D7E1B54C2601D7E90074794D /* Zip */,
 			);
 			productName = WKWebViewContainer;
-			productReference = D748441F25384C5600BFF55A /* WKWebViewContainer.app */;
+			productReference = D748441F25384C5600BFF55A /* KWKWebView.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -149,7 +155,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D748441A25384C5600BFF55A /* Build configuration list for PBXProject "WKWebViewContainer" */;
+			buildConfigurationList = D748441A25384C5600BFF55A /* Build configuration list for PBXProject "WKWebView" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -166,7 +172,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D748441E25384C5600BFF55A /* WKWebViewContainer */,
+				D748441E25384C5600BFF55A /* KWKWebView */,
 			);
 		};
 /* End PBXProject section */
@@ -191,9 +197,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				D796800E2602F4B800731902 /* Extension+UIView.swift in Sources */,
+				D75B8C122603455C008F2122 /* SettingViewController.swift in Sources */,
 				D748442725384C5600BFF55A /* ViewController.swift in Sources */,
 				D796801626031D5500731902 /* KWKWebViewDelegate.swift in Sources */,
-				D748442D25384C5600BFF55A /* WKWebViewContainer.xcdatamodeld in Sources */,
+				D748442D25384C5600BFF55A /* WKWebView.xcdatamodeld in Sources */,
+				D7089F6B260477BD00495322 /* ProgressDelegate.swift in Sources */,
 				D748442325384C5600BFF55A /* AppDelegate.swift in Sources */,
 				D70BEFA02539507F0020FB30 /* FileUtils.swift in Sources */,
 				D79680122602FAE500731902 /* KWKWebViewConfig.swift in Sources */,
@@ -384,7 +392,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D748441A25384C5600BFF55A /* Build configuration list for PBXProject "WKWebViewContainer" */ = {
+		D748441A25384C5600BFF55A /* Build configuration list for PBXProject "WKWebView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D748444A25384C5B00BFF55A /* Debug */,
@@ -393,7 +401,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D748444C25384C5B00BFF55A /* Build configuration list for PBXNativeTarget "WKWebViewContainer" */ = {
+		D748444C25384C5B00BFF55A /* Build configuration list for PBXNativeTarget "KWKWebView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D748444D25384C5B00BFF55A /* Debug */,
@@ -437,13 +445,13 @@
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
-		D748442B25384C5600BFF55A /* WKWebViewContainer.xcdatamodeld */ = {
+		D748442B25384C5600BFF55A /* WKWebView.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				D748442C25384C5600BFF55A /* WKWebViewContainer.xcdatamodel */,
 			);
 			currentVersion = D748442C25384C5600BFF55A /* WKWebViewContainer.xcdatamodel */;
-			path = WKWebViewContainer.xcdatamodeld;
+			path = WKWebView.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

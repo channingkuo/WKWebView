@@ -18,7 +18,7 @@ class KWKWebView: UIView {
     fileprivate var webView = WKWebView()
     
     /// 进度条
-    fileprivate var progressView = UIProgressView()
+//    fileprivate var progressView = UIProgressView()
     
     /// WKWebView配置项
     fileprivate let configuretion = WKWebViewConfiguration()
@@ -37,6 +37,9 @@ class KWKWebView: UIView {
     
     /// 设置代理
     weak var delegate: WKWebViewDelegate?
+    
+    /// WKWebView 加载进度代理
+    weak var progressDelegate: ProgressDelegate?
     
     override public init(frame: CGRect) {
         super.init(frame: frame)
@@ -69,8 +72,8 @@ class KWKWebView: UIView {
         webView.scrollView.showsVerticalScrollIndicator = webConfig.isShowScrollIndicator
         webView.scrollView.showsHorizontalScrollIndicator = webConfig.isShowScrollIndicator
         
-        // 监听支持KVO的属性
-        //webView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
+        // 监听支持KVO的属性——监听加载进度
+        webView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
         
         webView.sizeToFit()
         
@@ -107,6 +110,12 @@ class KWKWebView: UIView {
         let htmlURL = wwwBundleURL.appendingPathComponent("www", isDirectory: true)
         let htmlFileURL = URL(fileURLWithPath: htmlURL.path + "/\(fileName ?? "index").html")
         webView.loadFileURL(htmlFileURL, allowingReadAccessTo: htmlURL)
+    }
+    
+    open override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == "estimatedProgress"{
+            self.progressDelegate?.estimatedProgress(webView, estimatedProgress: webView.estimatedProgress)
+        }
     }
 }
 

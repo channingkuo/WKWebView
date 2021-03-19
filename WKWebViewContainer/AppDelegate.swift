@@ -11,12 +11,10 @@ import CoreData
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        // 检查本地缓存目录是否存在html项目，若不存在则从Assets.xcassets/www.zip解压到缓存目录
+        // 检查本地缓存目录是否存在html项目，若不存在则从www.bundle解压到缓存目录
         FileUtils.setupHtml()
         
         return true
