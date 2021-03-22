@@ -107,11 +107,31 @@ class KWKWebView: UIView {
         }
     }
     
+    func reload() {
+        webView.reload()
+    }
+    
+    func goBack() {
+        if webView.canGoBack {
+            webView.goBack()
+        }
+    }
+    
+    func goForward() {
+        if webView.canGoForward {
+            webView.goForward()
+        }
+    }
+    
     fileprivate func loadLocalHTML(fileName: String?) {
         let wwwBundleURL = Bundle.main.url(forResource: "www", withExtension: "bundle")!
         let htmlURL = wwwBundleURL.appendingPathComponent("www", isDirectory: true)
-        let htmlFileURL = URL(fileURLWithPath: htmlURL.path + "/\(fileName ?? "index").html")
-        webView.loadFileURL(htmlFileURL, allowingReadAccessTo: htmlURL)
+        
+//        let htmlFileURL = URL(fileURLWithPath: htmlURL.path + "/\(fileName ?? "index").html")
+//        webView.loadFileURL(htmlFileURL, allowingReadAccessTo: htmlURL)
+        
+        let htmlFileURL = URL(fileURLWithPath: wwwBundleURL.path + "/\(fileName ?? "index").html")
+        webView.loadFileURL(htmlFileURL, allowingReadAccessTo: wwwBundleURL)
     }
     
     open override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {

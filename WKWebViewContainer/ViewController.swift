@@ -7,6 +7,7 @@
 
 import UIKit
 import WebKit
+import SwiftyJSON
 
 class ViewController: UIViewController {
     
@@ -35,10 +36,6 @@ class ViewController: UIViewController {
         kWKWebView.webConfig = config
         
         kWKWebView.load(self, .HTML(fileName: nil))
-        
-//        let settingsStoryboard = UIStoryboard.init(name: "Settings", bundle: nil)
-//        let settingsViewCtrl = settingsStoryboard.instantiateViewController(identifier: "Settings")
-//        self.navigationController?.pushViewController(settingsViewCtrl, animated: true)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -119,28 +116,90 @@ extension ViewController: WKWebViewDelegate {
     }
     
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        #if DEBUG
         print("开始加载")
+        #endif
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        #if DEBUG
         print("加载完成!")
+        #endif
     }
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        #if DEBUG
         print("加载失败!")
+        #endif
     }
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        #if DEBUG
         print(error)
+        #endif
     }
     
     func webViewUserContentController(_ scriptMessageHandlerArray: [String], didReceive message: WKScriptMessage) {
-        print(message.body)
+        #if DEBUG
         print("JS 执行 Swift 代码")
+        print(message.body)
+        #endif
+        scriptMessageHandle(didReceive: JSON(message.body)["body"])
     }
     
     func webViewEvaluateJavaScript(_ result: Any?, error: Error?) {
+        #if DEBUG
         print(result as Any)
         print("Swift 执行 JS 到 WKWebview")
+        #endif
     }
+}
+
+// MARK: - ScriptMessageHandlerArray
+extension ViewController {
+    /// 桥接JS与Swift
+    func scriptMessageHandle(didReceive message: JSON) {
+        let action = ViewActionMode(rawValue: message["action"].stringValue)
+        let page = message["page"].stringValue
+        let type = message["type"].intValue
+        
+        switch action {
+        case .Open:
+            let settingsStoryboard = UIStoryboard.init(name: page, bundle: nil)
+            let settingsViewCtrl = settingsStoryboard.instantiateViewController(identifier: page)
+            
+            /// 默认打开方式为模态窗形式 => 0:modal、1:NavigationController push
+            if type == 0 {
+                self.present(settingsViewCtrl, animated: true, completion: nil)
+            } else {
+                self.navigationController?.pushViewController(settingsViewCtrl, animated: true)
+            }
+            break
+        case .Reload:
+            kWKWebView.reload()
+            break
+        case .Back:
+            kWKWebView.goBack()
+            break
+        case .Forward:
+            kWKWebView.goForward()
+            break
+        default: break
+        }
+    }
+}
+
+enum ViewActionMode: String {
+    
+    /// js 打开原生页面
+    case Open = "openPage"
+    
+    /// 重新加载WKWebView
+    case Reload = "reload"
+    
+    /// WKWebView返回
+    case Back = "goBack"
+    
+    /// WKWebView前进
+    case Forward = "goForward"
 }
