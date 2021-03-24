@@ -11,6 +11,8 @@
 		D7089F6B260477BD00495322 /* ProgressDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7089F6A260477BD00495322 /* ProgressDelegate.swift */; };
 		D70BEF9B253949CA0020FB30 /* KWKWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70BEF9A253949CA0020FB30 /* KWKWebView.swift */; };
 		D70BEFA02539507F0020FB30 /* FileUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70BEF9F2539507F0020FB30 /* FileUtils.swift */; };
+		D7356464260896A20000A7F4 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7356463260896A20000A7F4 /* LocationManager.swift */; };
+		D7356468260897400000A7F4 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7356467260897400000A7F4 /* CoreLocation.framework */; };
 		D748442325384C5600BFF55A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D748442225384C5600BFF55A /* AppDelegate.swift */; };
 		D748442525384C5600BFF55A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D748442425384C5600BFF55A /* SceneDelegate.swift */; };
 		D748442725384C5600BFF55A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D748442625384C5600BFF55A /* ViewController.swift */; };
@@ -19,6 +21,7 @@
 		D748442F25384C5A00BFF55A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D748442E25384C5A00BFF55A /* Assets.xcassets */; };
 		D748443225384C5A00BFF55A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D748443025384C5A00BFF55A /* LaunchScreen.storyboard */; };
 		D75B8C122603455C008F2122 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75B8C112603455C008F2122 /* SettingsViewController.swift */; };
+		D77B5568260B20E8005D9F67 /* GlobalSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77B5567260B20E8005D9F67 /* GlobalSettings.swift */; };
 		D796800E2602F4B800731902 /* Extension+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D796800D2602F4B800731902 /* Extension+UIView.swift */; };
 		D79680122602FAE500731902 /* KWKWebViewConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79680112602FAE500731902 /* KWKWebViewConfig.swift */; };
 		D796801626031D5500731902 /* KWKWebViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D796801526031D5500731902 /* KWKWebViewDelegate.swift */; };
@@ -33,6 +36,8 @@
 		D7089F6A260477BD00495322 /* ProgressDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressDelegate.swift; sourceTree = "<group>"; };
 		D70BEF9A253949CA0020FB30 /* KWKWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KWKWebView.swift; sourceTree = "<group>"; };
 		D70BEF9F2539507F0020FB30 /* FileUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileUtils.swift; sourceTree = "<group>"; };
+		D7356463260896A20000A7F4 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		D7356467260897400000A7F4 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		D748441F25384C5600BFF55A /* KWKWebView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KWKWebView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D748442225384C5600BFF55A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D748442425384C5600BFF55A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -43,6 +48,7 @@
 		D748443125384C5A00BFF55A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D748443325384C5A00BFF55A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D75B8C112603455C008F2122 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		D77B5567260B20E8005D9F67 /* GlobalSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalSettings.swift; sourceTree = "<group>"; };
 		D796800D2602F4B800731902 /* Extension+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIView.swift"; sourceTree = "<group>"; };
 		D79680112602FAE500731902 /* KWKWebViewConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KWKWebViewConfig.swift; sourceTree = "<group>"; };
 		D796801526031D5500731902 /* KWKWebViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KWKWebViewDelegate.swift; sourceTree = "<group>"; };
@@ -55,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7356468260897400000A7F4 /* CoreLocation.framework in Frameworks */,
 				D7E1B54D2601D7E90074794D /* Zip in Frameworks */,
 				D7E1B5492601D7B10074794D /* SwiftyJSON in Frameworks */,
 			);
@@ -63,11 +70,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D7356466260897400000A7F4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D7356467260897400000A7F4 /* CoreLocation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D748441625384C5600BFF55A = {
 			isa = PBXGroup;
 			children = (
 				D748442125384C5600BFF55A /* WKWebViewContainer */,
 				D748442025384C5600BFF55A /* Products */,
+				D7356466260897400000A7F4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -116,6 +132,8 @@
 			children = (
 				D796800D2602F4B800731902 /* Extension+UIView.swift */,
 				D70BEF9F2539507F0020FB30 /* FileUtils.swift */,
+				D77B5567260B20E8005D9F67 /* GlobalSettings.swift */,
+				D7356463260896A20000A7F4 /* LocationManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -203,6 +221,7 @@
 				D796800E2602F4B800731902 /* Extension+UIView.swift in Sources */,
 				D75B8C122603455C008F2122 /* SettingsViewController.swift in Sources */,
 				D748442725384C5600BFF55A /* ViewController.swift in Sources */,
+				D77B5568260B20E8005D9F67 /* GlobalSettings.swift in Sources */,
 				D796801626031D5500731902 /* KWKWebViewDelegate.swift in Sources */,
 				D748442D25384C5600BFF55A /* WKWebView.xcdatamodeld in Sources */,
 				D7089F6B260477BD00495322 /* ProgressDelegate.swift in Sources */,
@@ -212,6 +231,7 @@
 				D796801F26032C4400731902 /* ProgressView.swift in Sources */,
 				D70BEF9B253949CA0020FB30 /* KWKWebView.swift in Sources */,
 				D748442525384C5600BFF55A /* SceneDelegate.swift in Sources */,
+				D7356464260896A20000A7F4 /* LocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

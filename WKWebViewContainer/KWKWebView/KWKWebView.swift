@@ -62,8 +62,8 @@ class KWKWebView: UIView {
         webView.allowsBackForwardNavigationGestures = webConfig.isAllowsBackForwardGestures
         
         // 滚动条
-        webView.scrollView.showsVerticalScrollIndicator = webConfig.isShowScrollIndicator
-        webView.scrollView.showsHorizontalScrollIndicator = webConfig.isShowScrollIndicator
+        webView.scrollView.showsVerticalScrollIndicator = webConfig.isShowHorizontalScrollIndicator
+        webView.scrollView.showsHorizontalScrollIndicator = webConfig.isShowVerticalScrollIndicator
         
         // 监听支持KVO的属性——监听加载进度
         webView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)

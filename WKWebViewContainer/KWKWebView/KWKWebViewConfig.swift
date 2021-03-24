@@ -10,36 +10,36 @@ import UIKit
 struct KWKWebViewConfig {
     
     /// 默认最小字体字体
-    public var minFontSize: CGFloat = 0
+    public var minFontSize: CGFloat
     
-    /// 显示滚动条
-    public var isShowScrollIndicator: Bool = false
+    /// 显示水平滚动条
+    public var isShowHorizontalScrollIndicator: Bool
+    /// 显示垂直滚动条
+    public var isShowVerticalScrollIndicator: Bool
     
     /// 开启手势交互
-    public var isAllowsBackForwardGestures: Bool = true
+    public var isAllowsBackForwardGestures: Bool
     
     /// 是否允许加载javaScript
-    public var isjavaScriptEnabled: Bool = true
+    public var isjavaScriptEnabled: Bool
     
     /// 是否允许JS自动打开窗口的，必须通过用户交互才能打开
-    public var isAutomaticallyJavaScript: Bool = true
-    
-    /// 是否影藏进度条
-    public var isProgressHidden: Bool = false
-    
-    /// 进度条高度
-    public var progressHeight: CGFloat = 3
-    
-    /// 默认颜色
-    public var progressTrackTintColor: UIColor = UIColor.clear
-    
-    /// 加载颜色
-    public var progressTintColor: UIColor = UIColor.green
+    public var isAutomaticallyJavaScript: Bool
     
     /// WKScriptMessageHandler
     /// 添加一个名称，就可以在JS通过这个名称发送消息：kWKWebView自定义名字
     /// window.webkit.messageHandlers.kWKWebView.postMessage({body: 'xxx'})
-    public var scriptMessageHandlerArray: [String] = [String]()
+    public var scriptMessageHandlerArray: [String]
+    
+    init() {
+        minFontSize = GlobalSetting.minFontSize
+        isShowHorizontalScrollIndicator = GlobalSetting.isShowHorizontalScrollIndicator
+        isShowVerticalScrollIndicator = GlobalSetting.isShowVerticalScrollIndicator
+        isAllowsBackForwardGestures = GlobalSetting.isAllowsBackForwardGestures
+        isjavaScriptEnabled = GlobalSetting.isjavaScriptEnabled
+        isAutomaticallyJavaScript = GlobalSetting.isAutomaticallyJavaScript
+        scriptMessageHandlerArray = GlobalSetting.scriptMessageHandlerArray
+    }
 }
 
 enum KWKWebLoadType{

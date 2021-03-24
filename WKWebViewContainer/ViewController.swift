@@ -23,18 +23,11 @@ class ViewController: UIViewController {
         
         self.navigationController?.navigationBar.isHidden = true
         
-        var config = KWKWebViewConfig()
-        config.isShowScrollIndicator = false
-        config.isProgressHidden = false
-        
+        kWKWebView.webConfig = KWKWebViewConfig()
         kWKWebView.delegate = self
         kWKWebView.progressDelegate = self
         
 //        kWKWebView.load(self, .URL(url: "https://baidu.com"))
-        
-        config.scriptMessageHandlerArray = ["kWKWebView"]
-        kWKWebView.webConfig = config
-        
         kWKWebView.load(self, .HTML(fileName: nil))
     }
 
@@ -166,12 +159,13 @@ extension ViewController {
         switch action {
         case .Open:
             let settingsStoryboard = UIStoryboard.init(name: page, bundle: nil)
-            let settingsViewCtrl = settingsStoryboard.instantiateViewController(identifier: page)
+            let settingsViewCtrl = settingsStoryboard.instantiateViewController(identifier: page) as SettingsViewController
             
             /// 默认打开方式为模态窗形式 => 0:modal、1:NavigationController push
             if type == 0 {
                 self.present(settingsViewCtrl, animated: true, completion: nil)
             } else {
+                settingsViewCtrl.type = 1
                 self.navigationController?.pushViewController(settingsViewCtrl, animated: true)
             }
             break
