@@ -42,12 +42,12 @@
                                     <constraint firstAttribute="height" constant="44" id="Z2y-oJ-ygN"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9oU-5b-HII">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="9oU-5b-HII">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="knx-eg-HZ3" style="IBUITableViewCellStyleDefault" id="rkf-6q-M5Z">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rkf-6q-M5Z" id="9cl-Wh-66B">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -84,6 +84,7 @@
                     <connections>
                         <outlet property="actionBarView" destination="0KH-Ut-giB" id="LB0-4X-kaf"/>
                         <outlet property="cancelButton" destination="12M-W2-4eI" id="JNc-tE-9s7"/>
+                        <outlet property="tableView" destination="9oU-5b-HII" id="nTT-R3-YfB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4df-gE-HuE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

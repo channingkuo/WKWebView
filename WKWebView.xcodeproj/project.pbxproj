@@ -29,6 +29,7 @@
 		D7B948242539713500CF33A6 /* www.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D7B948232539713500CF33A6 /* www.bundle */; };
 		D7E1B5492601D7B10074794D /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = D7E1B5482601D7B10074794D /* SwiftyJSON */; };
 		D7E1B54D2601D7E90074794D /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = D7E1B54C2601D7E90074794D /* Zip */; };
+		D7EE6FFA260C82D9009DB791 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EE6FF9260C82D9009DB791 /* SettingsTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		D796801526031D5500731902 /* KWKWebViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KWKWebViewDelegate.swift; sourceTree = "<group>"; };
 		D796801E26032C4400731902 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		D7B948232539713500CF33A6 /* www.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = www.bundle; sourceTree = "<group>"; };
+		D7EE6FF9260C82D9009DB791 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 				D7089F6A260477BD00495322 /* ProgressDelegate.swift */,
 				D706535A2604B205006F2901 /* Settings.storyboard */,
 				D75B8C112603455C008F2122 /* SettingsViewController.swift */,
+				D7EE6FF9260C82D9009DB791 /* SettingsTableViewCell.swift */,
 			);
 			path = KWKWebView;
 			sourceTree = "<group>";
@@ -226,6 +229,7 @@
 				D748442D25384C5600BFF55A /* WKWebView.xcdatamodeld in Sources */,
 				D7089F6B260477BD00495322 /* ProgressDelegate.swift in Sources */,
 				D748442325384C5600BFF55A /* AppDelegate.swift in Sources */,
+				D7EE6FFA260C82D9009DB791 /* SettingsTableViewCell.swift in Sources */,
 				D70BEFA02539507F0020FB30 /* FileUtils.swift in Sources */,
 				D79680122602FAE500731902 /* KWKWebViewConfig.swift in Sources */,
 				D796801F26032C4400731902 /* ProgressView.swift in Sources */,
