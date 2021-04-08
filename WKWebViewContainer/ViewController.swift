@@ -29,11 +29,24 @@ class ViewController: UIViewController {
         
 //        kWKWebView.load(self, .URL(url: "https://baidu.com"))
         kWKWebView.load(self, .HTML(fileName: nil))
+        
+        print("viewDidLoad")
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        print("viewWillAppear")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(viewDismissNotification), name: NSNotification.Name(rawValue: "viewDismiss"), object: nil)
+    }
+    
+    @objc func viewDismissNotification() {
+        kWKWebView.reload()
     }
 }
 
@@ -41,7 +54,7 @@ class ViewController: UIViewController {
 extension ViewController: ProgressDelegate {
     
     func estimatedProgress(_ webView: WKWebView, estimatedProgress progress: Double) {
-        if progress >= 1.0 {
+        if progress >= 1.0 && progressView != nil {
             progressView.removeFromSuperview()
         }
     }
@@ -50,7 +63,7 @@ extension ViewController: ProgressDelegate {
 // MARK: - WKWebViewDelegate
 extension ViewController: WKWebViewDelegate {
     
-    /// 服务器开始请求的时候调用
+    /// 服务器开始请求的时候调用——桥接html请求变化链接
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         decisionHandler(.allow)
 //        let navigationURL = navigationAction.request.url?.absoluteString

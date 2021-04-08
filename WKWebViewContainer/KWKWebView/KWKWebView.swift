@@ -47,7 +47,7 @@ class KWKWebView: UIView {
     
     fileprivate func buildInterface(webConfig: KWKWebViewConfig) {
         configuretion.preferences = WKPreferences()
-        configuretion.preferences.minimumFontSize = webConfig.minFontSize
+        configuretion.preferences.minimumFontSize = CGFloat(webConfig.minFontSize)
         configuretion.preferences.javaScriptEnabled = webConfig.isjavaScriptEnabled
         configuretion.preferences.javaScriptCanOpenWindowsAutomatically = webConfig.isAutomaticallyJavaScript
         configuretion.userContentController = WKUserContentController()

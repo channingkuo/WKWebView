@@ -7,14 +7,67 @@
 
 import UIKit
 
-@IBDesignable
 class SettingsTableViewCell: UITableViewCell {
     
-    @IBInspectable var title: UILabel!
+    let canHighlightRow = [5, 6]
     
-    init(style: UITableViewCell.CellStyle, section: Int, row: Int) {
-        let reuseIdentifier = ""
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    var toggleCell: ToggleCell!
+    var numberCell: NumberCell!
+    
+    fileprivate final let rect = CGRect(x: 0, y: 0, width: GlobalViewSettings.tableViewCellWidth, height: GlobalViewSettings.tableViewCellHeight)
+    
+    var identifier: String!
+    
+    init(style: UITableViewCell.CellStyle, indexPath: IndexPath) {
+        super.init(style: style, reuseIdentifier: "\(indexPath.section)-\(indexPath.row)")
+        
+        identifier = "\(indexPath.section)-\(indexPath.row)"
+        toggleCell = ToggleCell(frame: rect)
+        toggleCell.cellValueDelegate = self
+        numberCell = NumberCell(frame: rect)
+        numberCell.cellValueDelegate = self
+        
+        switch identifier {
+        case "0-0":
+            toggleCell.setText(text: "开启手势交互")
+            toggleCell.setOn(isOn: GlobalSetting.isAllowsBackForwardGestures)
+            self.contentView.addSubview(toggleCell)
+            break
+        case "0-1":
+            toggleCell.setText(text: "显示水平滚动条")
+            toggleCell.setOn(isOn: GlobalSetting.isShowHorizontalScrollIndicator)
+            self.contentView.addSubview(toggleCell)
+            break
+        case "0-2":
+            toggleCell.setText(text: "显示垂直滚动条")
+            toggleCell.setOn(isOn: GlobalSetting.isShowVerticalScrollIndicator)
+            self.contentView.addSubview(toggleCell)
+            break
+        case "0-3":
+            toggleCell.setText(text: "允许javaScript打开窗口")
+            toggleCell.setOn(isOn: GlobalSetting.isAutomaticallyJavaScript)
+            self.contentView.addSubview(toggleCell)
+            break
+        case "0-4":
+            numberCell.setText(text: "默认最小字体字体")
+            numberCell.setNumber(number: GlobalSetting.minFontSize)
+            self.contentView.addSubview(numberCell)
+            break
+        case "0-5":
+            toggleCell.setText(text: "允许加载javaScript")
+            toggleCell.setOn(isOn: GlobalSetting.isJavaScriptEnabled)
+            toggleCell.setEnable(enable: false)
+            self.contentView.addSubview(toggleCell)
+            break
+        case "0-6":
+            break
+        case "1-1":
+            break
+        case "1-2":
+            break
+        default:
+            break
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -23,11 +76,40 @@ class SettingsTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        title = UILabel(frame: CGRect(x: 0, y: 0, width: self.frame.width / 2, height: self.frame.height))
     }
+}
+
+// MARK: - CellDelegate
+extension SettingsTableViewCell: CellDelegate {
     
-    public func setup(_ indexPath: IndexPath) {
-        
+    func cellValue(_ target: Any, value: Any) {
+        switch identifier {
+        case "0-0":
+            GlobalSetting.isAllowsBackForwardGestures = value as! Bool
+            break
+        case "0-1":
+            GlobalSetting.isShowHorizontalScrollIndicator = value as! Bool
+            break
+        case "0-2":
+            GlobalSetting.isShowVerticalScrollIndicator = value as! Bool
+            break
+        case "0-3":
+            GlobalSetting.isAutomaticallyJavaScript = value as! Bool
+            break
+        case "0-4":
+            GlobalSetting.minFontSize = value as! Int
+            break
+        case "0-5":
+            GlobalSetting.isJavaScriptEnabled = value as! Bool
+            break
+        case "0-6":
+            break
+        case "1-1":
+            break
+        case "1-2":
+            break
+        default:
+            break
+        }
     }
 }

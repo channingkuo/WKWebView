@@ -8,7 +8,7 @@
 import UIKit
 import Foundation
 
-class GlobalSetting{
+class GlobalSetting {
     /// 是否第一次打开应用
     static var isFirstOpen: Bool {
         get{
@@ -34,7 +34,7 @@ class GlobalSetting{
     }
     
     /// Base URL
-    static var xrmWebApiBaseUrl: String {
+    static var webApiBaseUrl: String {
         get{
             let v = UserDefaults.standard.value(forKey: "baseApiUrl")
             return v == nil ? "" : v as! String
@@ -70,10 +70,10 @@ class GlobalSetting{
     }
     
     /// WKWebview Config
-    static var minFontSize: CGFloat {
+    static var minFontSize: Int {
         get{
             let v = UserDefaults.standard.value(forKey: "minFontSize")
-            return v == nil ? 0 : v as! CGFloat
+            return v == nil ? 0 : v as! Int
         }
         set{
             UserDefaults.standard.set(newValue, forKey: "minFontSize")
@@ -114,13 +114,13 @@ class GlobalSetting{
         }
     }
     
-    static var isjavaScriptEnabled: Bool {
+    static var isJavaScriptEnabled: Bool {
         get{
-            let v = UserDefaults.standard.value(forKey: "isjavaScriptEnabled")
+            let v = UserDefaults.standard.value(forKey: "isJavaScriptEnabled")
             return v == nil ? true : v as! Bool
         }
         set{
-            UserDefaults.standard.set(newValue, forKey: "isjavaScriptEnabled")
+            UserDefaults.standard.set(newValue, forKey: "isJavaScriptEnabled")
             UserDefaults.standard.synchronize()
         }
     }

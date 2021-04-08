@@ -10,7 +10,7 @@ import UIKit
 struct KWKWebViewConfig {
     
     /// 默认最小字体字体
-    public var minFontSize: CGFloat
+    public var minFontSize: Int
     
     /// 显示水平滚动条
     public var isShowHorizontalScrollIndicator: Bool
@@ -36,7 +36,7 @@ struct KWKWebViewConfig {
         isShowHorizontalScrollIndicator = GlobalSetting.isShowHorizontalScrollIndicator
         isShowVerticalScrollIndicator = GlobalSetting.isShowVerticalScrollIndicator
         isAllowsBackForwardGestures = GlobalSetting.isAllowsBackForwardGestures
-        isjavaScriptEnabled = GlobalSetting.isjavaScriptEnabled
+        isjavaScriptEnabled = GlobalSetting.isJavaScriptEnabled
         isAutomaticallyJavaScript = GlobalSetting.isAutomaticallyJavaScript
         scriptMessageHandlerArray = GlobalSetting.scriptMessageHandlerArray
     }

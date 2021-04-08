@@ -11,6 +11,9 @@
 		D7089F6B260477BD00495322 /* ProgressDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7089F6A260477BD00495322 /* ProgressDelegate.swift */; };
 		D70BEF9B253949CA0020FB30 /* KWKWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70BEF9A253949CA0020FB30 /* KWKWebView.swift */; };
 		D70BEFA02539507F0020FB30 /* FileUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70BEF9F2539507F0020FB30 /* FileUtils.swift */; };
+		D70F3986261D7F9500BDC033 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D70F3985261D7F9500BDC033 /* SnapKit */; };
+		D70F3989261D822700BDC033 /* GlobalViewSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70F3988261D822700BDC033 /* GlobalViewSettings.swift */; };
+		D70F398D261D967200BDC033 /* NumberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70F398C261D967200BDC033 /* NumberCell.swift */; };
 		D7356464260896A20000A7F4 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7356463260896A20000A7F4 /* LocationManager.swift */; };
 		D7356468260897400000A7F4 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7356467260897400000A7F4 /* CoreLocation.framework */; };
 		D748442325384C5600BFF55A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D748442225384C5600BFF55A /* AppDelegate.swift */; };
@@ -26,6 +29,8 @@
 		D79680122602FAE500731902 /* KWKWebViewConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79680112602FAE500731902 /* KWKWebViewConfig.swift */; };
 		D796801626031D5500731902 /* KWKWebViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D796801526031D5500731902 /* KWKWebViewDelegate.swift */; };
 		D796801F26032C4400731902 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D796801E26032C4400731902 /* ProgressView.swift */; };
+		D7B1305B261EF86B00352BFE /* CellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B1305A261EF86B00352BFE /* CellDelegate.swift */; };
+		D7B495BB260DE28600BF36F7 /* ToggleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B495BA260DE28600BF36F7 /* ToggleCell.swift */; };
 		D7B948242539713500CF33A6 /* www.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D7B948232539713500CF33A6 /* www.bundle */; };
 		D7E1B5492601D7B10074794D /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = D7E1B5482601D7B10074794D /* SwiftyJSON */; };
 		D7E1B54D2601D7E90074794D /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = D7E1B54C2601D7E90074794D /* Zip */; };
@@ -37,6 +42,8 @@
 		D7089F6A260477BD00495322 /* ProgressDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressDelegate.swift; sourceTree = "<group>"; };
 		D70BEF9A253949CA0020FB30 /* KWKWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KWKWebView.swift; sourceTree = "<group>"; };
 		D70BEF9F2539507F0020FB30 /* FileUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileUtils.swift; sourceTree = "<group>"; };
+		D70F3988261D822700BDC033 /* GlobalViewSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalViewSettings.swift; sourceTree = "<group>"; };
+		D70F398C261D967200BDC033 /* NumberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberCell.swift; sourceTree = "<group>"; };
 		D7356463260896A20000A7F4 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		D7356467260897400000A7F4 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		D748441F25384C5600BFF55A /* KWKWebView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KWKWebView.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -54,6 +61,8 @@
 		D79680112602FAE500731902 /* KWKWebViewConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KWKWebViewConfig.swift; sourceTree = "<group>"; };
 		D796801526031D5500731902 /* KWKWebViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KWKWebViewDelegate.swift; sourceTree = "<group>"; };
 		D796801E26032C4400731902 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
+		D7B1305A261EF86B00352BFE /* CellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellDelegate.swift; sourceTree = "<group>"; };
+		D7B495BA260DE28600BF36F7 /* ToggleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleCell.swift; sourceTree = "<group>"; };
 		D7B948232539713500CF33A6 /* www.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = www.bundle; sourceTree = "<group>"; };
 		D7EE6FF9260C82D9009DB791 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -64,6 +73,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D7356468260897400000A7F4 /* CoreLocation.framework in Frameworks */,
+				D70F3986261D7F9500BDC033 /* SnapKit in Frameworks */,
 				D7E1B54D2601D7E90074794D /* Zip in Frameworks */,
 				D7E1B5492601D7B10074794D /* SwiftyJSON in Frameworks */,
 			);
@@ -133,10 +143,14 @@
 		D796802626032E3700731902 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				D7B1305A261EF86B00352BFE /* CellDelegate.swift */,
 				D796800D2602F4B800731902 /* Extension+UIView.swift */,
 				D70BEF9F2539507F0020FB30 /* FileUtils.swift */,
+				D70F3988261D822700BDC033 /* GlobalViewSettings.swift */,
 				D77B5567260B20E8005D9F67 /* GlobalSettings.swift */,
 				D7356463260896A20000A7F4 /* LocationManager.swift */,
+				D70F398C261D967200BDC033 /* NumberCell.swift */,
+				D7B495BA260DE28600BF36F7 /* ToggleCell.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -160,6 +174,7 @@
 			packageProductDependencies = (
 				D7E1B5482601D7B10074794D /* SwiftyJSON */,
 				D7E1B54C2601D7E90074794D /* Zip */,
+				D70F3985261D7F9500BDC033 /* SnapKit */,
 			);
 			productName = WKWebViewContainer;
 			productReference = D748441F25384C5600BFF55A /* KWKWebView.app */;
@@ -191,6 +206,7 @@
 			packageReferences = (
 				D7E1B5472601D7B10074794D /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				D7E1B54B2601D7E90074794D /* XCRemoteSwiftPackageReference "Zip" */,
+				D70F3984261D7F9500BDC033 /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = D748442025384C5600BFF55A /* Products */;
 			projectDirPath = "";
@@ -226,14 +242,18 @@
 				D748442725384C5600BFF55A /* ViewController.swift in Sources */,
 				D77B5568260B20E8005D9F67 /* GlobalSettings.swift in Sources */,
 				D796801626031D5500731902 /* KWKWebViewDelegate.swift in Sources */,
+				D70F3989261D822700BDC033 /* GlobalViewSettings.swift in Sources */,
 				D748442D25384C5600BFF55A /* WKWebView.xcdatamodeld in Sources */,
 				D7089F6B260477BD00495322 /* ProgressDelegate.swift in Sources */,
 				D748442325384C5600BFF55A /* AppDelegate.swift in Sources */,
 				D7EE6FFA260C82D9009DB791 /* SettingsTableViewCell.swift in Sources */,
 				D70BEFA02539507F0020FB30 /* FileUtils.swift in Sources */,
 				D79680122602FAE500731902 /* KWKWebViewConfig.swift in Sources */,
+				D7B1305B261EF86B00352BFE /* CellDelegate.swift in Sources */,
 				D796801F26032C4400731902 /* ProgressView.swift in Sources */,
 				D70BEF9B253949CA0020FB30 /* KWKWebView.swift in Sources */,
+				D70F398D261D967200BDC033 /* NumberCell.swift in Sources */,
+				D7B495BB260DE28600BF36F7 /* ToggleCell.swift in Sources */,
 				D748442525384C5600BFF55A /* SceneDelegate.swift in Sources */,
 				D7356464260896A20000A7F4 /* LocationManager.swift in Sources */,
 			);
@@ -442,6 +462,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		D70F3984261D7F9500BDC033 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.1;
+			};
+		};
 		D7E1B5472601D7B10074794D /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://gitee.com/channingk/SwiftyJSON.git";
@@ -461,6 +489,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D70F3985261D7F9500BDC033 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D70F3984261D7F9500BDC033 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
 		D7E1B5482601D7B10074794D /* SwiftyJSON */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D7E1B5472601D7B10074794D /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
