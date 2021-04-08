@@ -146,4 +146,15 @@ class GlobalSetting {
             UserDefaults.standard.synchronize()
         }
     }
+    
+    static var settingViewValueChanged: Bool {
+        get{
+            let v = UserDefaults.standard.value(forKey: "settingViewValueChanged")
+            return v == nil ? false : v as! Bool
+        }
+        set{
+            UserDefaults.standard.set(newValue, forKey: "settingViewValueChanged")
+            UserDefaults.standard.synchronize()
+        }
+    }
 }

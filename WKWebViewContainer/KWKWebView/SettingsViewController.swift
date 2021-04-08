@@ -40,8 +40,17 @@ class SettingsViewController: UIViewController {
         super.viewWillAppear(animated)
         
         // 保存刷新新的配置
-        // TODO 判断是否有变化值
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "viewDismiss"), object: nil)
+        // 如果设置页面的值有发生改变，则通知重新加载kWKWebView
+        if GlobalSetting.settingViewValueChanged {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "viewDismiss"), object: nil)
+        }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        // 重置设置页面数据的脏检查
+        GlobalSetting.settingViewValueChanged = false
     }
     
     fileprivate func dismissBack() {

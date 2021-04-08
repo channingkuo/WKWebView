@@ -83,6 +83,8 @@ class SettingsTableViewCell: UITableViewCell {
 extension SettingsTableViewCell: CellDelegate {
     
     func cellValue(_ target: Any, value: Any) {
+        GlobalSetting.settingViewValueChanged = true
+        
         switch identifier {
         case "0-0":
             GlobalSetting.isAllowsBackForwardGestures = value as! Bool
