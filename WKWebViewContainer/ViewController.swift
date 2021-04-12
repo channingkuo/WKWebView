@@ -184,7 +184,7 @@ extension ViewController: WKWebViewDelegate {
         #endif
     }
     
-    /// available(iOS 14, *)
+    @available(iOS 13.0, *)
     func webView(_ scriptMessageHandlerArray: [String], didReceive message: WKScriptMessage, resolve replyHandler: @escaping (Any?, String?) -> Void) {
         self.replyHandler = replyHandler
         
