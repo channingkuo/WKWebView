@@ -4,13 +4,6 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
     <title>KWKWebView</title>
     <style>
-        div {
-            margin-top: 50px;
-            margin-left: 50px;
-            width: 200px;
-            width: 50px;
-            font-size: 36px;
-        }
         button {
             width: 200px;
             height: 50px;
@@ -22,11 +15,22 @@
           <button onclick="test()">测试js传值到原生</button>
           
           <button onclick="openSettings()">打开设置</button>
+          
+          <button onclick="getLocation()">获取定位信息</button>
+          
+          <button onclick="chooseImage(0)">打开相机</button>
+          <button onclick="chooseImage(1)">选择相册</button>
+          <img id="chooseImage" style="width: 100px" />
+          <button onclick="chooseImage(2)">选择照片</button>
       </div>
       <div id="sec"></div>
+      <div id="callback"></div>
       
   <script type="text/javascript">
       document.getElementById("sec").innerHTML = new Date();
+      
+      localStorage["userInfo"] = JSON.stringify({token: 'qwertyuioplkjhgfdsazxcvbnm'});
+      
       /**
        1.KWKWebView服务器传值固定写法，当然valueName是自己随意定制的
        2.body就是值的内容，也可以传一个空的字符串，具体什么格式自己和后台同事商量测试
@@ -39,16 +43,38 @@
     }
     function openSettings() {
         /**
-         action: openPage  /reload         /goBack      /forward
-         ------- 打开原生页面/重新加载WKWebView/WKWebView返回/WKWebView前进
+         action: openPage  /reload         /goBack      /forward      /location  /image
+         ------- 打开原生页面/重新加载WKWebView/WKWebView返回/WKWebView前进/获取定位信息 /打开相机拍照或选取相册照片
          type: action为openPage时,控制打开的方式，0: Modal打开、1: NavigationController push;默认为0
+         type: action为image时，控制打开相机还是相册，0: 打开相机、1: 打开相册、2: 弹出sheet可选择;默认为0
          page: action为openPage时,打开的页面
+         distance: action为location时，定位进度，默认为100
+         allowsEditing: action为image时，控制是否允许进行编辑照片，true/false
          */
         window.webkit.messageHandlers.kWKWebView.postMessage({body: {
             action: 'openPage',
             type: 0,
             page: 'Settings'
         }});
+    }
+    function getLocation() {
+        window.webkit.messageHandlers.kWKWebView.postMessage({body: {
+            action: 'location',
+            distance: 10
+        }}).then((replay, err) => {
+            document.getElementById("callback").innerHTML = new Date().getTime() + "<br />" + replay;
+        });
+    }
+    function chooseImage(type) {
+        window.webkit.messageHandlers.kWKWebView.postMessage({body: {
+            action: 'image',
+            type: type,
+            allowsEditing: true
+        }}).then((replay, err) => {
+            let resp = JSON.parse(replay)
+            document.getElementById("chooseImage").src = resp.url;
+            document.getElementById("callback").innerHTML = resp.base64;
+        });
     }
   </script>
  </body>

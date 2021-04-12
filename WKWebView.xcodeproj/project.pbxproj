@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D700C2F026201E3700A7AA9A /* LocationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D700C2EF26201E3700A7AA9A /* LocationUtils.swift */; };
 		D706535B2604B205006F2901 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D706535A2604B205006F2901 /* Settings.storyboard */; };
 		D7089F6B260477BD00495322 /* ProgressDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7089F6A260477BD00495322 /* ProgressDelegate.swift */; };
 		D70BEF9B253949CA0020FB30 /* KWKWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70BEF9A253949CA0020FB30 /* KWKWebView.swift */; };
@@ -14,6 +15,7 @@
 		D70F3986261D7F9500BDC033 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D70F3985261D7F9500BDC033 /* SnapKit */; };
 		D70F3989261D822700BDC033 /* GlobalViewSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70F3988261D822700BDC033 /* GlobalViewSettings.swift */; };
 		D70F398D261D967200BDC033 /* NumberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70F398C261D967200BDC033 /* NumberCell.swift */; };
+		D71C08D426240D0200443582 /* ImageUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71C08D326240D0200443582 /* ImageUtils.swift */; };
 		D7356464260896A20000A7F4 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7356463260896A20000A7F4 /* LocationManager.swift */; };
 		D7356468260897400000A7F4 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7356467260897400000A7F4 /* CoreLocation.framework */; };
 		D748442325384C5600BFF55A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D748442225384C5600BFF55A /* AppDelegate.swift */; };
@@ -38,12 +40,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D700C2EF26201E3700A7AA9A /* LocationUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationUtils.swift; sourceTree = "<group>"; };
 		D706535A2604B205006F2901 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		D7089F6A260477BD00495322 /* ProgressDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressDelegate.swift; sourceTree = "<group>"; };
 		D70BEF9A253949CA0020FB30 /* KWKWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KWKWebView.swift; sourceTree = "<group>"; };
 		D70BEF9F2539507F0020FB30 /* FileUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileUtils.swift; sourceTree = "<group>"; };
 		D70F3988261D822700BDC033 /* GlobalViewSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalViewSettings.swift; sourceTree = "<group>"; };
 		D70F398C261D967200BDC033 /* NumberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberCell.swift; sourceTree = "<group>"; };
+		D71C08CA2623F50C00443582 /* zh-Hans-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans-CN"; path = "zh-Hans-CN.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		D71C08CB2623F50C00443582 /* zh-Hans-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans-CN"; path = "zh-Hans-CN.lproj/Main.strings"; sourceTree = "<group>"; };
+		D71C08CC2623F56200443582 /* en-US */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-US"; path = "en-US.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		D71C08CD2623F56200443582 /* en-US */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-US"; path = "en-US.lproj/Main.strings"; sourceTree = "<group>"; };
+		D71C08D326240D0200443582 /* ImageUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageUtils.swift; sourceTree = "<group>"; };
 		D7356463260896A20000A7F4 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		D7356467260897400000A7F4 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		D748441F25384C5600BFF55A /* KWKWebView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KWKWebView.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,6 +90,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D700C2F526204E1200A7AA9A /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				D71C08D326240D0200443582 /* ImageUtils.swift */,
+				D7356463260896A20000A7F4 /* LocationManager.swift */,
+				D700C2EF26201E3700A7AA9A /* LocationUtils.swift */,
+				D70F398C261D967200BDC033 /* NumberCell.swift */,
+				D7B495BA260DE28600BF36F7 /* ToggleCell.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		D7356466260897400000A7F4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -112,6 +132,7 @@
 			children = (
 				D796802426032DEE00731902 /* KWKWebView */,
 				D796802626032E3700731902 /* Utils */,
+				D700C2F526204E1200A7AA9A /* Common */,
 				D748442225384C5600BFF55A /* AppDelegate.swift */,
 				D748442425384C5600BFF55A /* SceneDelegate.swift */,
 				D748442625384C5600BFF55A /* ViewController.swift */,
@@ -148,9 +169,6 @@
 				D70BEF9F2539507F0020FB30 /* FileUtils.swift */,
 				D70F3988261D822700BDC033 /* GlobalViewSettings.swift */,
 				D77B5567260B20E8005D9F67 /* GlobalSettings.swift */,
-				D7356463260896A20000A7F4 /* LocationManager.swift */,
-				D70F398C261D967200BDC033 /* NumberCell.swift */,
-				D7B495BA260DE28600BF36F7 /* ToggleCell.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -201,6 +219,8 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans-CN",
+				"en-US",
 			);
 			mainGroup = D748441625384C5600BFF55A;
 			packageReferences = (
@@ -241,6 +261,7 @@
 				D75B8C122603455C008F2122 /* SettingsViewController.swift in Sources */,
 				D748442725384C5600BFF55A /* ViewController.swift in Sources */,
 				D77B5568260B20E8005D9F67 /* GlobalSettings.swift in Sources */,
+				D700C2F026201E3700A7AA9A /* LocationUtils.swift in Sources */,
 				D796801626031D5500731902 /* KWKWebViewDelegate.swift in Sources */,
 				D70F3989261D822700BDC033 /* GlobalViewSettings.swift in Sources */,
 				D748442D25384C5600BFF55A /* WKWebView.xcdatamodeld in Sources */,
@@ -256,6 +277,7 @@
 				D7B495BB260DE28600BF36F7 /* ToggleCell.swift in Sources */,
 				D748442525384C5600BFF55A /* SceneDelegate.swift in Sources */,
 				D7356464260896A20000A7F4 /* LocationManager.swift in Sources */,
+				D71C08D426240D0200443582 /* ImageUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,6 +288,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				D748442925384C5600BFF55A /* Base */,
+				D71C08CB2623F50C00443582 /* zh-Hans-CN */,
+				D71C08CD2623F56200443582 /* en-US */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -274,6 +298,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				D748443125384C5A00BFF55A /* Base */,
+				D71C08CA2623F50C00443582 /* zh-Hans-CN */,
+				D71C08CC2623F56200443582 /* en-US */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -285,6 +311,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -346,6 +373,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

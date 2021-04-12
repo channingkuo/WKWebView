@@ -26,8 +26,11 @@ protocol WKWebViewDelegate: class {
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error)
     
     /// 执行JS注入方法
-    func webViewUserContentController(_ scriptMessageHandlerArray:[String], didReceive message: WKScriptMessage)
+    func webViewUserContentController(_ scriptMessageHandlerArray: [String], didReceive message: WKScriptMessage)
     
     /// JS执行回调方法
-    func webViewEvaluateJavaScript(_ result:Any?,error:Error?)
+    func webViewEvaluateJavaScript(_ result: Any?, error: Error?)
+    
+    /// JS执行结果直接返回给Web，Promise resolve
+    func webView(_ scriptMessageHandlerArray: [String], didReceive message: WKScriptMessage, resolve replyHandler: @escaping (Any?, String?) -> Void)
 }

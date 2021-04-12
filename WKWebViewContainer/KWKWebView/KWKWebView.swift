@@ -46,13 +46,18 @@ class KWKWebView: UIView {
     }
     
     fileprivate func buildInterface(webConfig: KWKWebViewConfig) {
+        configuretion.processPool = WKProcessPool()
         configuretion.preferences = WKPreferences()
         configuretion.preferences.minimumFontSize = CGFloat(webConfig.minFontSize)
         configuretion.preferences.javaScriptEnabled = webConfig.isjavaScriptEnabled
         configuretion.preferences.javaScriptCanOpenWindowsAutomatically = webConfig.isAutomaticallyJavaScript
-        configuretion.userContentController = WKUserContentController()
         
-        _ = webConfig.scriptMessageHandlerArray.map{configuretion.userContentController.add(self, name: $0)}
+        configuretion.userContentController = WKUserContentController()
+        if #available(iOS 14, *) {
+            _ = webConfig.scriptMessageHandlerArray.map{configuretion.userContentController.addScriptMessageHandler(self, contentWorld: .page, name: $0)}
+        } else {
+            _ = webConfig.scriptMessageHandlerArray.map{configuretion.userContentController.add(self, name: $0)}
+        }
         
         webView = WKWebView(frame: frame, configuration: configuretion)
         // 禁止WKWebView下拉回弹
@@ -107,6 +112,16 @@ class KWKWebView: UIView {
         }
     }
     
+    @available(iOS 14.0, *)
+    func callAsyncJavaScript(javaScript script: String, arguments: [String : Any] = [:], completionHandler: ((Result<Any, Error>) -> Void)? = nil) {
+        webView.callAsyncJavaScript(script, arguments: arguments, in: nil, in: .defaultClient, completionHandler: {
+            result in
+            if completionHandler != nil {
+                completionHandler!(result)
+            }
+        })
+    }
+    
     func reload() {
         webView.reload()
     }
@@ -125,7 +140,7 @@ class KWKWebView: UIView {
     
     fileprivate func loadLocalHTML(fileName: String?) {
         let wwwBundleURL = Bundle.main.url(forResource: "www", withExtension: "bundle")!
-        let htmlURL = wwwBundleURL.appendingPathComponent("www", isDirectory: true)
+//        let htmlURL = wwwBundleURL.appendingPathComponent("www", isDirectory: true)
         
 //        let htmlFileURL = URL(fileURLWithPath: htmlURL.path + "/\(fileName ?? "index").html")
 //        webView.loadFileURL(htmlFileURL, allowingReadAccessTo: htmlURL)
@@ -143,10 +158,21 @@ class KWKWebView: UIView {
 
 // MARK: - WKScriptMessageHandler
 extension KWKWebView: WKScriptMessageHandler {
-    
+
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         if let scriptMessage = webConfig?.scriptMessageHandlerArray {
             self.delegate?.webViewUserContentController(scriptMessage, didReceive: message)
+        }
+    }
+}
+
+// MARK: - WKScriptMessageHandlerWithReply
+/// available(iOS 14, *)
+extension KWKWebView: WKScriptMessageHandlerWithReply {
+    
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage, replyHandler: @escaping (Any?, String?) -> Void) {
+        if let scriptMessage = webConfig?.scriptMessageHandlerArray {
+            self.delegate?.webView(scriptMessage, didReceive: message, resolve: replyHandler)
         }
     }
 }
