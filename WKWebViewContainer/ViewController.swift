@@ -197,12 +197,11 @@ extension ViewController {
     /// 桥接JS与Swift
     func scriptMessageHandle(didReceive message: JSON) {
         let action = ViewActionMode(rawValue: message["action"].stringValue)
-        let page = message["page"].stringValue
         
         switch action {
-        case .Open:
-            let settingsStoryboard = UIStoryboard.init(name: page, bundle: nil)
-            let settingsViewCtrl = settingsStoryboard.instantiateViewController(identifier: page) as SettingsViewController
+        case .OpenSettings:
+            let settingsStoryboard = UIStoryboard.init(name: "Settings", bundle: nil)
+            let settingsViewCtrl = settingsStoryboard.instantiateViewController(identifier: "Settings") as SettingsViewController
             
             /// 默认打开方式为模态窗形式 => 0:modal、1:NavigationController push
             let type = message["type"].intValue
@@ -256,6 +255,21 @@ extension ViewController {
             } else {
                 presentImagePickerController(.camera, allowsEditing: allowsEditing)
             }
+            break
+        case .Preview:
+            if !message["data"].stringValue.isEmpty {
+                let previewStoryboard = UIStoryboard.init(name: "Preview", bundle: nil)
+                let previewCtrl = previewStoryboard.instantiateViewController(identifier: "Preview") as PreviewController
+                previewCtrl.imageData = message["data"].stringValue
+                previewCtrl.modalTransitionStyle = .crossDissolve
+                previewCtrl.modalPresentationStyle = .overFullScreen
+                self.present(previewCtrl, animated: true, completion: nil)
+            }
+            break
+        case .Call:
+//            let callWebView = WKWebView()
+//            callWebView.load(URLRequest(url: URL(string: "tel:\(message["phoneNumber"].stringValue)")!))
+//            UIApplication.shared.keyWindow?.addSubview(callWebView)
             break
         default: break
         }
@@ -319,7 +333,7 @@ extension ViewController: UIImagePickerControllerDelegate {
 enum ViewActionMode: String {
     
     /// js 打开原生页面
-    case Open = "openPage"
+    case OpenSettings = "openSettings"
     
     /// 重新加载WKWebView
     case Reload = "reload"
@@ -335,4 +349,10 @@ enum ViewActionMode: String {
     
     /// 打开箱机拍照或选取相册照片
     case Image = "image"
+    
+    /// 预览图片
+    case Preview = "preview"
+    
+    /// 呼叫电话
+    case Call = "call"
 }
