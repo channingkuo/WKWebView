@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+    <title>KWKWebView</title>
+    <style>
+        button {
+            width: 200px;
+            height: 50px;
+        }
+    </style>
+</head>
+  <body>
+      <div>
+          <button onclick="test()">测试js传值到原生</button>
+          
+          <button onclick="openSettings()">打开设置</button>
+          
+          <button onclick="getLocation()">获取定位信息</button>
+          
+          <button onclick="chooseImage(0)">打开相机</button>
+          <button onclick="chooseImage(1)">选择相册</button>
+          <img id="chooseImage" style="width: 100px" onclick="previewImageTest()" />
+          <button onclick="chooseImage(2)">选择照片</button>
+          <button onclick="previewImage('https://t7.baidu.com/it/u=1595072465,3644073269&fm=193&f=GIF')">预览图片</button>
+          <button onclick="call()">打电话</button>
+      </div>
+      <div id="sec"></div>
+      <div id="callback"></div>
+      <!--defer  type="module"-->
+      <script src="test.js"></script>
+ </body>
+</html>

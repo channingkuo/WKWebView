@@ -84,11 +84,16 @@ class KWKWebView: UIView {
     func load(_ target: AnyObject, _ kWKWebLoadType: KWKWebLoadType) {
         self.target = target
         
-        buildInterface(webConfig: webConfig ?? KWKWebViewConfig())
+        webConfig = webConfig ?? KWKWebViewConfig()
+        buildInterface(webConfig: webConfig!)
         
         switch kWKWebLoadType {
         case .HTML(let fileName):
-            loadLocalHTML(fileName: fileName)
+            if !webConfig!.enableWebServer {
+                loadLocalWebServerHTML(fileName: fileName)
+            } else {
+                loadLocalHTML(fileName: fileName)
+            }
             break
         case .URL(let urlString):
             let url = URL(string: urlString)
@@ -140,13 +145,26 @@ class KWKWebView: UIView {
     
     fileprivate func loadLocalHTML(fileName: String?) {
         let wwwBundleURL = Bundle.main.url(forResource: "www", withExtension: "bundle")!
-//        let htmlURL = wwwBundleURL.appendingPathComponent("www", isDirectory: true)
+        let htmlURL = wwwBundleURL.appendingPathComponent("www", isDirectory: true)
         
 //        let htmlFileURL = URL(fileURLWithPath: htmlURL.path + "/\(fileName ?? "index").html")
 //        webView.loadFileURL(htmlFileURL, allowingReadAccessTo: htmlURL)
         
-        let htmlFileURL = URL(fileURLWithPath: wwwBundleURL.path + "/\(fileName ?? "index").html")
+        let htmlFileURL = URL(fileURLWithPath: wwwBundleURL.path + "/test.html")
         webView.loadFileURL(htmlFileURL, allowingReadAccessTo: wwwBundleURL)
+    }
+    
+    fileprivate func loadLocalWebServerHTML(fileName: String?) {
+        let wwwBundleURL = Bundle.main.url(forResource: "www", withExtension: "bundle")!
+        let htmlURL = wwwBundleURL.appendingPathComponent("www", isDirectory: true)
+        
+        let webServer = GCDWebServer()
+        webServer.addGETHandler(forBasePath: "/", directoryPath: htmlURL.path, indexFilename: "/\(fileName ?? "index")", cacheAge: 3600, allowRangeRequests: true)
+        webServer.start(withPort: 8080, bonjourName: nil)
+        
+        let url = webServer.serverURL!.appendingPathComponent("\(fileName ?? "index").html")
+        let request = URLRequest(url: url)
+        webView.load(request)
     }
     
     open override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {

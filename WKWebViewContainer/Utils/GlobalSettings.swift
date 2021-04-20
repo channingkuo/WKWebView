@@ -49,7 +49,7 @@ class GlobalSetting {
     static var wwwVersion: String {
         get{
             let v = UserDefaults.standard.value(forKey: "wwwVersion")
-            return v == nil ? "1.0.0.0" : v as! String
+            return v == nil ? "0.0.1" : v as! String
         }
         set{
             UserDefaults.standard.set(newValue, forKey: "wwwVersion")
@@ -154,6 +154,17 @@ class GlobalSetting {
         }
         set{
             UserDefaults.standard.set(newValue, forKey: "settingViewValueChanged")
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
+    static var enableWebServer: Bool {
+        get{
+            let v = UserDefaults.standard.value(forKey: "enableWebServer")
+            return v == nil ? true : v as! Bool
+        }
+        set{
+            UserDefaults.standard.set(newValue, forKey: "enableWebServer")
             UserDefaults.standard.synchronize()
         }
     }

@@ -32,8 +32,6 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
         
 //        kWKWebView.load(self, .URL(url: "https://baidu.com"))
         kWKWebView.load(self, .HTML(fileName: nil))
-        
-        print("viewDidLoad")
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -48,6 +46,10 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(viewDismissNotification), name: NSNotification.Name(rawValue: "viewDismiss"), object: nil)
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
     @objc func viewDismissNotification() {
         kWKWebView.reload()
     }
@@ -58,6 +60,7 @@ extension ViewController: ProgressDelegate {
     
     func estimatedProgress(_ webView: WKWebView, estimatedProgress progress: Double) {
         if progress >= 1.0 && progressView != nil {
+            // TODO 延迟1秒移除
             progressView.removeFromSuperview()
         }
     }
@@ -143,7 +146,7 @@ extension ViewController: WKWebViewDelegate {
                 result in
                 switch result {
                 case .success(let resp):
-                    let userInfo = JSON(parseJSON: resp as! String)
+                    let userInfo = JSON(parseJSON: resp as? String ?? "")
                     print(userInfo["token"].stringValue)
                     break
                 case .failure(_):

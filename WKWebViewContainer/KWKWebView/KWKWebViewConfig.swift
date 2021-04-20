@@ -31,6 +31,8 @@ struct KWKWebViewConfig {
     /// window.webkit.messageHandlers.kWKWebView.postMessage({body: 'xxx'})
     public var scriptMessageHandlerArray: [String]
     
+    public var enableWebServer: Bool
+    
     init() {
         minFontSize = GlobalSetting.minFontSize
         isShowHorizontalScrollIndicator = GlobalSetting.isShowHorizontalScrollIndicator
@@ -39,6 +41,7 @@ struct KWKWebViewConfig {
         isjavaScriptEnabled = GlobalSetting.isJavaScriptEnabled
         isAutomaticallyJavaScript = GlobalSetting.isAutomaticallyJavaScript
         scriptMessageHandlerArray = GlobalSetting.scriptMessageHandlerArray
+        enableWebServer = GlobalSetting.enableWebServer
     }
 }
 

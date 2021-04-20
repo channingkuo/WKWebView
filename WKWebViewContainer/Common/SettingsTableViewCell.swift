@@ -61,7 +61,10 @@ class SettingsTableViewCell: UITableViewCell {
             break
         case "0-6":
             break
-        case "1-1":
+        case "1-0":
+            toggleCell.setText(text: "Local Web Server")
+            toggleCell.setOn(isOn: GlobalSetting.enableWebServer)
+            self.contentView.addSubview(toggleCell)
             break
         case "1-2":
             break
@@ -106,7 +109,8 @@ extension SettingsTableViewCell: CellDelegate {
             break
         case "0-6":
             break
-        case "1-1":
+        case "1-0":
+            GlobalSetting.enableWebServer = value as! Bool
             break
         case "1-2":
             break

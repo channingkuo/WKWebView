@@ -85,7 +85,11 @@ extension SettingsViewController: UITableViewDelegate {
 extension SettingsViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
+        #if DEBUG
+        return 2
+        #else
         return 1
+        #endif
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
