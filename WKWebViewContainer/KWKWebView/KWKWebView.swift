@@ -89,7 +89,7 @@ class KWKWebView: UIView {
         
         switch kWKWebLoadType {
         case .HTML(let fileName):
-            if webConfig!.enableWebServer {
+            if !webConfig!.enableWebServer {
                 loadLocalWebServerHTML(fileName: fileName)
             } else {
                 loadLocalHTML(fileName: fileName)

@@ -85,11 +85,7 @@ extension SettingsViewController: UITableViewDelegate {
 extension SettingsViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        #if DEBUG
         return 2
-        #else
-        return 1
-        #endif
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -104,6 +100,13 @@ extension SettingsViewController: UITableViewDataSource {
             return "设置"
         }
         return "其他"
+    }
+    
+    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        if section == 0 {
+            return nil
+        }
+        return "开启Local Web Server将以静态站点的方式加载HTML，更加灵活。关闭则以文件方式加载HTML，部分前端框架打包后的文可能存在无法访问(ionic)的情况，还有些框架可能需要调整打包方式才能正常访问"
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
