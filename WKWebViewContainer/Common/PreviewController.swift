@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class PreviewController: UIViewController {
     
@@ -36,9 +37,8 @@ class PreviewController: UIViewController {
     
     fileprivate func setupImage() {
         if imageData!.hasPrefix("http") || imageData!.hasPrefix("https") {
-            let url = URL(string: imageData!)!
-            let data = try? Data(contentsOf: url)
-            previewImage.image = UIImage(data: data!)
+            let url = URL(string: imageData!)
+            previewImage.sd_setImage(with: url, completed: nil)
         } else if imageData!.hasPrefix("file") {
             let url = URL(string: imageData!)!
             let data = try? Data(contentsOf: url)
