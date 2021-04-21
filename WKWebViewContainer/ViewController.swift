@@ -15,6 +15,9 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
     @IBOutlet weak var progressView: ProgressView!
     @IBOutlet weak var kWKWebView: KWKWebView!
     
+    fileprivate var statusView: UIView!
+    
+    // iOS13.0以上专有的WKWebView与js同性回调
     fileprivate var replyHandler: ((Any?, String?) -> Void)?
     
     // TODO 设计一个Class保存请求的所有记录
@@ -26,18 +29,23 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
         
         self.navigationController?.navigationBar.isHidden = true
         
+        let statusBarFrame: CGRect?
+        if #available(iOS 13, *) {
+            statusBarFrame = UIApplication.shared.windows.first?.windowScene?.statusBarManager?.statusBarFrame
+        } else {
+            statusBarFrame = UIApplication.shared.statusBarFrame
+        }
+        statusView = UIView(frame: statusBarFrame!)
+        self.view.addSubview(statusView)
+        
         kWKWebView.webConfig = KWKWebViewConfig()
         kWKWebView.delegate = self
         kWKWebView.progressDelegate = self
-        
-//        kWKWebView.load(self, .URL(url: "https://baidu.com"))
         kWKWebView.load(self, .HTML(fileName: nil))
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        print("viewWillAppear")
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -60,8 +68,12 @@ extension ViewController: ProgressDelegate {
     
     func estimatedProgress(_ webView: WKWebView, estimatedProgress progress: Double) {
         if progress >= 1.0 && progressView != nil {
-            // TODO 延迟1秒移除
-            progressView.removeFromSuperview()
+            // TODO 从HTML读取状态栏的颜色
+            statusView.backgroundColor = UIColor(red: 236 / 255, green: 128 / 255, blue: 13 / 255, alpha: 1)
+            // 延迟1秒移除
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.progressView.removeFromSuperview()
+            }
         }
     }
 }

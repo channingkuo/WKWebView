@@ -27,12 +27,10 @@ class ProgressView: UIView {
                 let animation = CABasicAnimation(keyPath: "transform.scale")
                 animation.fromValue = 1
                 animation.toValue = 0
-                animation.timingFunction = CAMediaTimingFunction(
-                    name: CAMediaTimingFunctionName(rawValue: "easeInEaseOut")
-                )
+                animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName(rawValue: "easeInEaseOut"))
                 animation.repeatCount = 1
                 animation.duration = 0.7
-                animation.isRemovedOnCompletion = true
+                animation.isRemovedOnCompletion = false
                 animation.fillMode = .forwards
                 // add animation into layer
                 view.layer.add(animation, forKey: nil)
