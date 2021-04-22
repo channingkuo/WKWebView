@@ -23,6 +23,8 @@ class KWKWebView: UIView {
     /// 是否是第一次加载
     fileprivate var firstLoad: Bool = true
     
+    fileprivate var webServer = GCDWebServer()
+    
     /// WebView配置项
     var webConfig: KWKWebViewConfig?
     
@@ -89,7 +91,7 @@ class KWKWebView: UIView {
         
         switch kWKWebLoadType {
         case .HTML(let fileName):
-            if !webConfig!.enableWebServer {
+            if webConfig!.enableWebServer {
                 loadLocalWebServerHTML(fileName: fileName)
             } else {
                 loadLocalHTML(fileName: fileName)
@@ -128,7 +130,13 @@ class KWKWebView: UIView {
     }
     
     func reload() {
-        webView.reload()
+        if webConfig!.enableWebServer {
+            let url = webServer.serverURL!.appendingPathComponent("index.html")
+            let request = URLRequest(url: url)
+            webView.load(request)
+        } else {
+            webView.reload()
+        }
     }
     
     func goBack() {
@@ -147,19 +155,23 @@ class KWKWebView: UIView {
         let wwwBundleURL = Bundle.main.url(forResource: "www", withExtension: "bundle")!
         let htmlURL = wwwBundleURL.appendingPathComponent("www", isDirectory: true)
         
-//        let htmlFileURL = URL(fileURLWithPath: htmlURL.path + "/\(fileName ?? "index").html")
-//        webView.loadFileURL(htmlFileURL, allowingReadAccessTo: htmlURL)
+        let htmlFileURL = URL(fileURLWithPath: htmlURL.path + "/\(fileName ?? "index").html")
+        webView.loadFileURL(htmlFileURL, allowingReadAccessTo: htmlURL)
         
-        let htmlFileURL = URL(fileURLWithPath: wwwBundleURL.path + "/test.html")
-        webView.loadFileURL(htmlFileURL, allowingReadAccessTo: wwwBundleURL)
+//        let htmlFileURL = URL(fileURLWithPath: wwwBundleURL.path + "/test.html")
+//        webView.loadFileURL(htmlFileURL, allowingReadAccessTo: wwwBundleURL)
     }
     
     fileprivate func loadLocalWebServerHTML(fileName: String?) {
         let wwwBundleURL = Bundle.main.url(forResource: "www", withExtension: "bundle")!
         let htmlURL = wwwBundleURL.appendingPathComponent("www", isDirectory: true)
         
-        let webServer = GCDWebServer()
         webServer.addGETHandler(forBasePath: "/", directoryPath: htmlURL.path, indexFilename: "/\(fileName ?? "index")", cacheAge: 3600, allowRangeRequests: true)
+        webServer.addHandler(forMethod: "GET", path: "/", request: GCDWebServerRequest.self) {
+            request -> GCDWebServerResponse in
+            let url = URL(string: "\(fileName ?? "index").html", relativeTo: request.url)
+            return GCDWebServerResponse(redirect: url!, permanent: false)
+        }
         webServer.start(withPort: 8080, bonjourName: nil)
         
         let url = webServer.serverURL!.appendingPathComponent("\(fileName ?? "index").html")

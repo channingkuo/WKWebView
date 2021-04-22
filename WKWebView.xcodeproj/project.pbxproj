@@ -20,6 +20,8 @@
 		D71C08DC2624394400443582 /* Preview.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D71C08DB2624394400443582 /* Preview.storyboard */; };
 		D7356464260896A20000A7F4 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7356463260896A20000A7F4 /* LocationManager.swift */; };
 		D7356468260897400000A7F4 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7356467260897400000A7F4 /* CoreLocation.framework */; };
+		D7382E1F262FED7F00B9C524 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D7382E1E262FED7F00B9C524 /* Alamofire */; };
+		D7382E22262FEDC300B9C524 /* WwwUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7382E21262FEDC300B9C524 /* WwwUtils.swift */; };
 		D748442325384C5600BFF55A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D748442225384C5600BFF55A /* AppDelegate.swift */; };
 		D748442525384C5600BFF55A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D748442425384C5600BFF55A /* SceneDelegate.swift */; };
 		D748442725384C5600BFF55A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D748442625384C5600BFF55A /* ViewController.swift */; };
@@ -34,6 +36,7 @@
 		D796801626031D5500731902 /* KWKWebViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D796801526031D5500731902 /* KWKWebViewDelegate.swift */; };
 		D796801F26032C4400731902 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D796801E26032C4400731902 /* ProgressView.swift */; };
 		D7B1305B261EF86B00352BFE /* CellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B1305A261EF86B00352BFE /* CellDelegate.swift */; };
+		D7B2FC9026312A4600B4EB04 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2FC8F26312A4600B4EB04 /* ProgressBar.swift */; };
 		D7B495BB260DE28600BF36F7 /* ToggleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B495BA260DE28600BF36F7 /* ToggleCell.swift */; };
 		D7B948242539713500CF33A6 /* www.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D7B948232539713500CF33A6 /* www.bundle */; };
 		D7BD1EBD26253D6C00AA76AE /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = D7BD1EBC26253D6C00AA76AE /* SDWebImage */; };
@@ -73,6 +76,7 @@
 		D71C08DB2624394400443582 /* Preview.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Preview.storyboard; sourceTree = "<group>"; };
 		D7356463260896A20000A7F4 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		D7356467260897400000A7F4 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		D7382E21262FEDC300B9C524 /* WwwUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WwwUtils.swift; sourceTree = "<group>"; };
 		D748441F25384C5600BFF55A /* KWKWebView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KWKWebView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D748442225384C5600BFF55A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D748442425384C5600BFF55A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -89,6 +93,7 @@
 		D796801526031D5500731902 /* KWKWebViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KWKWebViewDelegate.swift; sourceTree = "<group>"; };
 		D796801E26032C4400731902 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		D7B1305A261EF86B00352BFE /* CellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellDelegate.swift; sourceTree = "<group>"; };
+		D7B2FC8F26312A4600B4EB04 /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		D7B495BA260DE28600BF36F7 /* ToggleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleCell.swift; sourceTree = "<group>"; };
 		D7B948232539713500CF33A6 /* www.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = www.bundle; sourceTree = "<group>"; };
 		D7CE282B262D853900DA2CC8 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
@@ -130,6 +135,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D7CE282C262D853900DA2CC8 /* libz.tbd in Frameworks */,
+				D7382E1F262FED7F00B9C524 /* Alamofire in Frameworks */,
 				D7356468260897400000A7F4 /* CoreLocation.framework in Frameworks */,
 				D70F3986261D7F9500BDC033 /* SnapKit in Frameworks */,
 				D7E1B54D2601D7E90074794D /* Zip in Frameworks */,
@@ -148,6 +154,7 @@
 				D70F398C261D967200BDC033 /* NumberCell.swift */,
 				D71C08DB2624394400443582 /* Preview.storyboard */,
 				D71C08D6262438C400443582 /* PreviewController.swift */,
+				D7B2FC8F26312A4600B4EB04 /* ProgressBar.swift */,
 				D706535A2604B205006F2901 /* Settings.storyboard */,
 				D7EE6FF9260C82D9009DB791 /* SettingsTableViewCell.swift */,
 				D75B8C112603455C008F2122 /* SettingsViewController.swift */,
@@ -224,6 +231,7 @@
 				D70F3988261D822700BDC033 /* GlobalViewSettings.swift */,
 				D71C08D326240D0200443582 /* ImageUtils.swift */,
 				D700C2EF26201E3700A7AA9A /* LocationUtils.swift */,
+				D7382E21262FEDC300B9C524 /* WwwUtils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -309,6 +317,7 @@
 				D7E1B54C2601D7E90074794D /* Zip */,
 				D70F3985261D7F9500BDC033 /* SnapKit */,
 				D7BD1EBC26253D6C00AA76AE /* SDWebImage */,
+				D7382E1E262FED7F00B9C524 /* Alamofire */,
 			);
 			productName = WKWebViewContainer;
 			productReference = D748441F25384C5600BFF55A /* KWKWebView.app */;
@@ -344,6 +353,7 @@
 				D7E1B54B2601D7E90074794D /* XCRemoteSwiftPackageReference "Zip" */,
 				D70F3984261D7F9500BDC033 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				D7BD1EBB26253D6C00AA76AE /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				D7382E1D262FED7F00B9C524 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = D748442025384C5600BFF55A /* Products */;
 			projectDirPath = "";
@@ -383,6 +393,7 @@
 				D7CE2876262D8FFC00DA2CC8 /* GCDWebServerFileResponse.m in Sources */,
 				D7CE2871262D8FFC00DA2CC8 /* GCDWebServerRequest.m in Sources */,
 				D700C2F026201E3700A7AA9A /* LocationUtils.swift in Sources */,
+				D7B2FC9026312A4600B4EB04 /* ProgressBar.swift in Sources */,
 				D7CE2873262D8FFC00DA2CC8 /* GCDWebServer.m in Sources */,
 				D796801626031D5500731902 /* KWKWebViewDelegate.swift in Sources */,
 				D70F3989261D822700BDC033 /* GlobalViewSettings.swift in Sources */,
@@ -406,6 +417,7 @@
 				D748442525384C5600BFF55A /* SceneDelegate.swift in Sources */,
 				D7CE2879262D8FFC00DA2CC8 /* GCDWebServerURLEncodedFormRequest.m in Sources */,
 				D7356464260896A20000A7F4 /* LocationManager.swift in Sources */,
+				D7382E22262FEDC300B9C524 /* WwwUtils.swift in Sources */,
 				D7CE287C262D8FFC00DA2CC8 /* GCDWebServerFileRequest.m in Sources */,
 				D7CE2877262D8FFC00DA2CC8 /* GCDWebServerDataResponse.m in Sources */,
 				D7CE2870262D8FFC00DA2CC8 /* GCDWebServerResponse.m in Sources */,
@@ -642,6 +654,14 @@
 				minimumVersion = 5.0.1;
 			};
 		};
+		D7382E1D262FED7F00B9C524 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://gitee.com/channingk/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.4.2;
+			};
+		};
 		D7BD1EBB26253D6C00AA76AE /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
@@ -673,6 +693,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D70F3984261D7F9500BDC033 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		D7382E1E262FED7F00B9C524 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D7382E1D262FED7F00B9C524 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 		D7BD1EBC26253D6C00AA76AE /* SDWebImage */ = {
 			isa = XCSwiftPackageProductDependency;

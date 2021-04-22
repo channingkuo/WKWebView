@@ -46,13 +46,13 @@ class GlobalSetting {
     }
     
     /// HTML5版本号
-    static var wwwVersion: String {
+    static var htmlVersion: String {
         get{
-            let v = UserDefaults.standard.value(forKey: "wwwVersion")
+            let v = UserDefaults.standard.value(forKey: "htmlVersion")
             return v == nil ? "0.0.1" : v as! String
         }
         set{
-            UserDefaults.standard.set(newValue, forKey: "wwwVersion")
+            UserDefaults.standard.set(newValue, forKey: "htmlVersion")
             UserDefaults.standard.synchronize()
         }
     }

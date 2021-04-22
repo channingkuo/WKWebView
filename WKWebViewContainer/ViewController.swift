@@ -8,6 +8,7 @@
 import UIKit
 import WebKit
 import SwiftyJSON
+import SnapKit
 import CoreLocation
 
 class ViewController: UIViewController, UINavigationControllerDelegate {
@@ -17,7 +18,10 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
     
     fileprivate var statusView: UIView!
     
-    // iOS13.0以上专有的WKWebView与js同性回调
+    fileprivate var downloadingView: ProgressBar!
+    fileprivate var downloadingViewPresented: Bool = false
+    
+    // iOS13.0以上专有的WKWebView与js回调
     fileprivate var replyHandler: ((Any?, String?) -> Void)?
     
     // TODO 设计一个Class保存请求的所有记录
@@ -26,6 +30,8 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        downloadingView = ProgressBar(progress: 0.0)
         
         self.navigationController?.navigationBar.isHidden = true
         
@@ -52,6 +58,16 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
         super.viewWillAppear(animated)
         
         NotificationCenter.default.addObserver(self, selector: #selector(viewDismissNotification), name: NSNotification.Name(rawValue: "viewDismiss"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(htmlVersionUpdateProgress), name: NSNotification.Name(rawValue: "htmlVersionUpdateProgress"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(htmlVersionUpdated), name: NSNotification.Name(rawValue: "htmlVersionUpdated"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(htmlVersionUpdateFailed), name: NSNotification.Name(rawValue: "htmlVersionUpdateFailed"), object: nil)
+        
+        DispatchQueue.global().async() {
+            WwwUtils.checkHtmlVersion()
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -60,6 +76,43 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
     
     @objc func viewDismissNotification() {
         kWKWebView.reload()
+    }
+    
+    @objc func htmlVersionUpdateProgress(_ notification: NSNotification) {
+        let progress = notification.object as! Double
+        #if DEBUG
+        print("Download Progress: \(progress)")
+        #endif
+        
+        downloadingView.setProgress(Float(progress), animation: true)
+
+        if !downloadingViewPresented {
+            self.present(downloadingView.bar, animated: true, completion: nil)
+
+            downloadingViewPresented = true
+        }
+    }
+    
+    @objc func htmlVersionUpdated() {
+        let alert = UIAlertController(title: "温馨提示", message: "新版本已更新，是否加载", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "确定", style: .default, handler: { (_) -> Void in
+            self.dismiss(animated: true, completion: nil)
+            
+            self.kWKWebView.reload()
+        }))
+        alert.addAction(UIAlertAction(title: "取消", style: .cancel) { (_) -> Void in
+            self.dismiss(animated: true, completion: nil)
+        })
+        downloadingView.bar.present(alert, animated: true, completion: nil)
+    }
+    
+    @objc func htmlVersionUpdateFailed() {
+        let alert = UIAlertController(title: "检查版本更新异常", message: "", preferredStyle: .alert)
+        self.present(alert, animated: true, completion: nil)
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
 }
 
@@ -70,7 +123,7 @@ extension ViewController: ProgressDelegate {
         if progress >= 1.0 && progressView != nil {
             // TODO 从HTML读取状态栏的颜色
             statusView.backgroundColor = UIColor(red: 236 / 255, green: 128 / 255, blue: 13 / 255, alpha: 1)
-            // 延迟1秒移除
+            // 延迟1秒移除——为了遮挡HTML加载瞬间的"白屏"
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 self.progressView.removeFromSuperview()
             }

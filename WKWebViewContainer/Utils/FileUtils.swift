@@ -66,7 +66,7 @@ class FileUtils {
     }
     
     // 删除指定路径文件夹里的所有文件
-    class func deleteFile(path: String){
+    class func deleteFile(path: String, completeHandler: (() -> Void)?){
         if path.isEmpty {
             return
         }
@@ -77,6 +77,9 @@ class FileUtils {
         let fileArray = fileManager.subpaths(atPath: path)
         for file in fileArray! {
             try? fileManager.removeItem(atPath: path + "/\(file)")
+        }
+        if completeHandler != nil {
+            completeHandler!()
         }
     }
     
@@ -103,20 +106,30 @@ class FileUtils {
         
         let manager = FileManager.default
         let wwwPath = try? manager.contentsOfDirectory(atPath: wwwBundleURL.path + "/www")
+        let wwwPathURL = wwwBundleURL.appendingPathComponent("www", isDirectory: true)
         if wwwPath == nil {
-            let wwwPathURL = wwwBundleURL.appendingPathComponent("www", isDirectory: true)
-            
             try? manager.createDirectory(atPath: wwwPathURL.path, withIntermediateDirectories: true, attributes: nil)
         }
         
-        // TODO document下特定文件夹下没有www.zip，则拷贝一份bundle里面的www.zip到document
-        let zipFilePath = wwwBundleURL.appendingPathComponent("www.zip")
-        FileUtils.unZipWWW(zipFilePath)
+        let fileArray = manager.subpaths(atPath: wwwPathURL.path)
+        // 如果www目录为空则解压缩一份bundle里面的www.zip，不为空则使用缓存
+        if fileArray != nil && fileArray!.count <= 0 {
+            let zipURL = wwwBundleURL.appendingPathComponent("www.zip")
+            unZipWWW(zipURL)
+        }
     }
     
     class func unZipWWW(_ zipFilePath: URL) {
         let wwwBundleURL = Bundle.main.url(forResource: "www", withExtension: "bundle")!
         
-        try? Zip.unzipFile(zipFilePath, destination: wwwBundleURL, overwrite: true, password: nil)
+        // document下没有www.zip，则拷贝一份bundle里面的www.zip到document
+        let manager = FileManager.default
+        if !manager.fileExists(atPath: zipFilePath.path) {
+            try? manager.copyItem(atPath: wwwBundleURL.appendingPathComponent("www.zip").path, toPath: zipFilePath.path)
+        }
+        
+        deleteFile(path: wwwBundleURL.appendingPathComponent("www", isDirectory: true).path) {
+            try? Zip.unzipFile(zipFilePath, destination: wwwBundleURL, overwrite: true, password: nil)
+        }
     }
 }
