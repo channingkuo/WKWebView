@@ -8,7 +8,6 @@
 import UIKit
 import WebKit
 import SwiftyJSON
-import SnapKit
 import CoreLocation
 
 class ViewController: UIViewController, UINavigationControllerDelegate {
