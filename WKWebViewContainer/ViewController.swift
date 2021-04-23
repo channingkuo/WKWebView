@@ -241,7 +241,9 @@ extension ViewController: WKWebViewDelegate {
         print("JS 执行 Swift 代码")
         print(message.body)
         #endif
-        scriptMessageHandle(didReceive: JSON(message.body)["body"])
+        if scriptMessageHandlerArray.contains(message.name) {
+            scriptMessageHandle(didReceive: JSON(message.body)["body"])
+        }
     }
     
     func webViewEvaluateJavaScript(_ result: Any?, error: Error?) {
@@ -253,9 +255,11 @@ extension ViewController: WKWebViewDelegate {
     
     @available(iOS 13.0, *)
     func webView(_ scriptMessageHandlerArray: [String], didReceive message: WKScriptMessage, resolve replyHandler: @escaping (Any?, String?) -> Void) {
-        self.replyHandler = replyHandler
-        
-        scriptMessageHandle(didReceive: JSON(message.body)["body"])
+        if scriptMessageHandlerArray.contains(message.name) {
+            self.replyHandler = replyHandler
+            
+            scriptMessageHandle(didReceive: JSON(message.body)["body"])
+        }
     }
 }
 

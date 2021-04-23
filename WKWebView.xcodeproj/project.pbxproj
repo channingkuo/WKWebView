@@ -37,6 +37,8 @@
 		D796801F26032C4400731902 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D796801E26032C4400731902 /* ProgressView.swift */; };
 		D7B1305B261EF86B00352BFE /* CellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B1305A261EF86B00352BFE /* CellDelegate.swift */; };
 		D7B2FC9026312A4600B4EB04 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2FC8F26312A4600B4EB04 /* ProgressBar.swift */; };
+		D7B2FC9526317F8400B4EB04 /* KWKJSBridge.js in Resources */ = {isa = PBXBuildFile; fileRef = D7B2FC9426317F8400B4EB04 /* KWKJSBridge.js */; };
+		D7B2FC982631858000B4EB04 /* KWKJSBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2FC972631858000B4EB04 /* KWKJSBridge.swift */; };
 		D7B495BB260DE28600BF36F7 /* ToggleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B495BA260DE28600BF36F7 /* ToggleCell.swift */; };
 		D7B948242539713500CF33A6 /* www.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D7B948232539713500CF33A6 /* www.bundle */; };
 		D7BD1EBD26253D6C00AA76AE /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = D7BD1EBC26253D6C00AA76AE /* SDWebImage */; };
@@ -94,6 +96,8 @@
 		D796801E26032C4400731902 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		D7B1305A261EF86B00352BFE /* CellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellDelegate.swift; sourceTree = "<group>"; };
 		D7B2FC8F26312A4600B4EB04 /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
+		D7B2FC9426317F8400B4EB04 /* KWKJSBridge.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = KWKJSBridge.js; sourceTree = "<group>"; };
+		D7B2FC972631858000B4EB04 /* KWKJSBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KWKJSBridge.swift; sourceTree = "<group>"; };
 		D7B495BA260DE28600BF36F7 /* ToggleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleCell.swift; sourceTree = "<group>"; };
 		D7B948232539713500CF33A6 /* www.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = www.bundle; sourceTree = "<group>"; };
 		D7CE282B262D853900DA2CC8 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
@@ -213,6 +217,8 @@
 		D796802426032DEE00731902 /* KWKWebView */ = {
 			isa = PBXGroup;
 			children = (
+				D7B2FC9426317F8400B4EB04 /* KWKJSBridge.js */,
+				D7B2FC972631858000B4EB04 /* KWKJSBridge.swift */,
 				D70BEF9A253949CA0020FB30 /* KWKWebView.swift */,
 				D79680112602FAE500731902 /* KWKWebViewConfig.swift */,
 				D796801526031D5500731902 /* KWKWebViewDelegate.swift */,
@@ -372,6 +378,7 @@
 				D748443225384C5A00BFF55A /* LaunchScreen.storyboard in Resources */,
 				D748442F25384C5A00BFF55A /* Assets.xcassets in Resources */,
 				D748442A25384C5600BFF55A /* Main.storyboard in Resources */,
+				D7B2FC9526317F8400B4EB04 /* KWKJSBridge.js in Resources */,
 				D7B948242539713500CF33A6 /* www.bundle in Resources */,
 				D706535B2604B205006F2901 /* Settings.storyboard in Resources */,
 				D71C08DC2624394400443582 /* Preview.storyboard in Resources */,
@@ -404,6 +411,7 @@
 				D7EE6FFA260C82D9009DB791 /* SettingsTableViewCell.swift in Sources */,
 				D70BEFA02539507F0020FB30 /* FileUtils.swift in Sources */,
 				D79680122602FAE500731902 /* KWKWebViewConfig.swift in Sources */,
+				D7B2FC982631858000B4EB04 /* KWKJSBridge.swift in Sources */,
 				D7B1305B261EF86B00352BFE /* CellDelegate.swift in Sources */,
 				D71C08D7262438C400443582 /* PreviewController.swift in Sources */,
 				D7CE2874262D8FFC00DA2CC8 /* GCDWebServerConnection.m in Sources */,
