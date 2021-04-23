@@ -23,22 +23,29 @@ class KWKWebView: UIView {
     /// 是否是第一次加载
     fileprivate var firstLoad: Bool = true
     
+    /// local web server
     fileprivate var webServer = GCDWebServer()
+    
+    fileprivate var kWKJSBridge: KWKJSBridge!
     
     /// WebView配置项
     var webConfig: KWKWebViewConfig?
     
     /// 设置代理
-    weak var delegate: WKWebViewDelegate?
+    var delegate: KWKNavigationDelegate
     
     /// WKWebView 加载进度代理
     weak var progressDelegate: ProgressDelegate?
     
     override public init(frame: CGRect) {
+        delegate = KWKNavigationDelegate()
+        
         super.init(frame: frame)
     }
     
     required init?(coder: NSCoder) {
+        delegate = KWKNavigationDelegate()
+        
         super.init(coder: coder)
     }
     
@@ -54,12 +61,18 @@ class KWKWebView: UIView {
         configuretion.preferences.javaScriptEnabled = webConfig.isjavaScriptEnabled
         configuretion.preferences.javaScriptCanOpenWindowsAutomatically = webConfig.isAutomaticallyJavaScript
         
-        configuretion.userContentController = WKUserContentController()
+        kWKJSBridge = KWKJSBridge(webView: self)
+        
+        let userContentController = WKUserContentController()
+        let wkUserScript = WKUserScript(source: kWKJSBridge.wkUserScript(), injectionTime: .atDocumentStart, forMainFrameOnly: true)
+        userContentController.addUserScript(wkUserScript)
         if #available(iOS 14, *) {
-            _ = webConfig.scriptMessageHandlerArray.map{configuretion.userContentController.addScriptMessageHandler(self, contentWorld: .page, name: $0)}
+            _ = webConfig.scriptMessageHandlerArray.map{userContentController.addScriptMessageHandler(kWKJSBridge, contentWorld: .page, name: $0)}
         } else {
-            _ = webConfig.scriptMessageHandlerArray.map{configuretion.userContentController.add(self, name: $0)}
+            _ = webConfig.scriptMessageHandlerArray.map{userContentController.add(kWKJSBridge, name: $0)}
         }
+        configuretion.userContentController = userContentController
+        
         
         webView = WKWebView(frame: frame, configuration: configuretion)
         // 禁止WKWebView下拉回弹
@@ -91,7 +104,7 @@ class KWKWebView: UIView {
         
         switch kWKWebLoadType {
         case .HTML(let fileName):
-            if webConfig!.enableWebServer {
+            if !webConfig!.enableWebServer {
                 loadLocalWebServerHTML(fileName: fileName)
             } else {
                 loadLocalHTML(fileName: fileName)
@@ -114,7 +127,7 @@ class KWKWebView: UIView {
         if let script = script {
             webView.evaluateJavaScript(script) { result, error in
                 print(error ?? "")
-                self.delegate?.webViewEvaluateJavaScript(result, error: error)
+                self.delegate.webViewEvaluateJavaScript(result, error: error)
             }
         }
     }
@@ -155,11 +168,11 @@ class KWKWebView: UIView {
         let wwwBundleURL = Bundle.main.url(forResource: "www", withExtension: "bundle")!
         let htmlURL = wwwBundleURL.appendingPathComponent("www", isDirectory: true)
         
-        let htmlFileURL = URL(fileURLWithPath: htmlURL.path + "/\(fileName ?? "index").html")
-        webView.loadFileURL(htmlFileURL, allowingReadAccessTo: htmlURL)
+//        let htmlFileURL = URL(fileURLWithPath: htmlURL.path + "/\(fileName ?? "index").html")
+//        webView.loadFileURL(htmlFileURL, allowingReadAccessTo: htmlURL)
         
-//        let htmlFileURL = URL(fileURLWithPath: wwwBundleURL.path + "/test.html")
-//        webView.loadFileURL(htmlFileURL, allowingReadAccessTo: wwwBundleURL)
+        let htmlFileURL = URL(fileURLWithPath: wwwBundleURL.path + "/test.html")
+        webView.loadFileURL(htmlFileURL, allowingReadAccessTo: wwwBundleURL)
     }
     
     fileprivate func loadLocalWebServerHTML(fileName: String?) {
@@ -186,72 +199,48 @@ class KWKWebView: UIView {
     }
 }
 
-// MARK: - WKScriptMessageHandler
-extension KWKWebView: WKScriptMessageHandler {
-
-    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        if let scriptMessage = webConfig?.scriptMessageHandlerArray {
-            self.delegate?.webViewUserContentController(scriptMessage, didReceive: message)
-        }
-    }
-}
-
-// MARK: - WKScriptMessageHandlerWithReply
-/// available(iOS 14, *)
-extension KWKWebView: WKScriptMessageHandlerWithReply {
-    
-    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage, replyHandler: @escaping (Any?, String?) -> Void) {
-        if let scriptMessage = webConfig?.scriptMessageHandlerArray {
-            self.delegate?.webView(scriptMessage, didReceive: message, resolve: replyHandler)
-        }
-    }
-}
-
 // MARK: - WKNavigationDelegate
 extension KWKWebView: WKNavigationDelegate {
-    
+
     /// 服务器开始请求的时候调用
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        self.delegate?.webView(webView, decidePolicyFor: navigationAction, decisionHandler: decisionHandler)
+        self.delegate.webView(webView, decidePolicyFor: navigationAction, decisionHandler: decisionHandler)
     }
-    
+
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        self.delegate?.webView(webView, didStartProvisionalNavigation: navigation)
+        self.delegate.webView(webView, didStartProvisionalNavigation: navigation)
     }
-    
+
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         if firstLoad {
             firstLoad = false
         }
-        self.delegate?.webView(webView, didFinish: navigation)
+        self.delegate.webView(webView, didFinish: navigation)
     }
-    
+
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        self.delegate?.webView(webView, didFail: navigation, withError: error)
+        self.delegate.webView(webView, didFail: navigation, withError: error)
     }
-    
+
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        self.delegate?.webView(webView, didFailProvisionalNavigation: navigation, withError: error)
+        self.delegate.webView(webView, didFailProvisionalNavigation: navigation, withError: error)
     }
 }
 
 // MARK: - WKUIDelegate 不实现该代理方法 网页内调用弹窗时会抛出异常,导致程序崩溃
 extension KWKWebView: WKUIDelegate {
     
-    // 获取js 里面的提示
+    // alert
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
         
         let alert = UIAlertController(title: "提示", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "确定", style: .default, handler: { (_) -> Void in
             completionHandler()
         }))
-        alert.addAction(UIAlertAction(title: "取消", style: .cancel, handler: { (_) -> Void in
-            completionHandler()
-        }))
         target?.present(alert, animated: true, completion: nil)
     }
     
-    // js 信息的交流
+    // confirm
     func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
         
         let alert = UIAlertController(title: "提示", message: message, preferredStyle: .alert)
@@ -264,7 +253,7 @@ extension KWKWebView: WKUIDelegate {
         target?.present(alert, animated: true, completion: nil)
     }
     
-    // 交互 可输入的文本。
+    // input
     func webView(_ webView: WKWebView, runJavaScriptTextInputPanelWithPrompt prompt: String, defaultText: String?, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (String?) -> Void) {
         
         let alert = UIAlertController(title: prompt, message: defaultText, preferredStyle: .alert)

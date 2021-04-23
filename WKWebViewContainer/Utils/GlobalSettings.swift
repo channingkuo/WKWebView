@@ -9,6 +9,11 @@ import UIKit
 import Foundation
 
 class GlobalSetting {
+    
+    static var tableViewCellWidth: CGFloat = UIScreen.main.bounds.width
+    
+    static var tableViewCellHeight: CGFloat = 46
+    
     /// 是否第一次打开应用
     static var isFirstOpen: Bool {
         get{

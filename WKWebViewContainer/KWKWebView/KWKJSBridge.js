@@ -1,79 +1,79 @@
-var KWKJSBridge = {
+const KWKJSBridge = {
 
-  callAPI: (funcName, params, callBack) => {
-    var message;
-    var plugin = 'KWKJSBridge';
-    var callBackId = plugin + '_' + funcName + '_' + 'CallBack';
+	command: function (funcName, params, callback) {
+		var message;
+		var body;
+		var plugin = 'KWKJSCoreBridge';
+		var callbackId = plugin + '_' + funcName + '_' + 'callback';
 
-    if (callBack) {
-      if (!JSBridgeEvent._listeners[callBackId]) {
-        JSBridgeEvent.addEvent(callBackId, function (data) {
-          callBack(data);
-        });
-      }
-    }
+		if (callback) {
+			if (!KWKJSBridgeEvent._listeners[callbackId]) {
+				KWKJSBridgeEvent.addEvent(callbackId, (data) => {
+					callback(data);
+				});
+			}
+		}
+		if (callback) {
+			body = { 'plugin': plugin, 'func': funcName, 'params': params, 'callbackId': callbackId };
+		} else {
+			body = { 'plugin': plugin, 'func': funcName, 'params': params };
+		}
+		message = { body: body };
+		window.webkit.messageHandlers.kWKWebView.postMessage(message);
+	},
 
-    if (callBack) {
-      message = { 'plugin': plugin, 'func': funcName, 'params': params, 'callBackID': callBackId };
-    } else {
-      message = { 'plugin': plugin, 'func': funcName, 'params': params };
-    }
+	callback: (callBackID, data) => {
+		KWKJSBridgeEvent.fireEvent(callBackID, data);
+	},
 
-    window.webkit.messageHandlers.kWKWebView.postMessage(message);
-  },
-
-  callBack: (callBackID, data) => {
-    JSBridgeEvent.fireEvent(callBackID, data);
-  },
-
-  removeAllCallBacks: () => {
-    JSBridgeEvent._listeners = {};
-  }
+	removeAllCallBacks: () => {
+		KWKJSBridgeEvent._listeners = {};
+	}
 };
 
-var KWKJSBridgeEvent = {
+const KWKJSBridgeEvent = {
 
-  _listeners: {},
+	_listeners: {},
 
-  addEvent: (type, fn) => {
-    if (typeof this._listeners[type] === "undefined") {
-      this._listeners[type] = [];
-    }
-    if (typeof fn === "function") {
-      this._listeners[type].push(fn);
-    }
+	addEvent: function (type, fn) {
+		if (typeof this._listeners[type] === "undefined") {
+			this._listeners[type] = [];
+		}
+		if (typeof fn === "function") {
+			this._listeners[type].push(fn);
+		}
 
-    return this;
-  },
+		return this;
+	},
 
-  fireEvent: (type, param) => {
-    var arrayEvent = this._listeners[type];
-    if (arrayEvent instanceof Array) {
-      for (var i = 0, length = arrayEvent.length; i < length; i += 1) {
-        if (typeof arrayEvent[i] === "function") {
-          arrayEvent[i](param);
-        }
-      }
-    }
+	fireEvent: function (type, param) {
+		var arrayEvent = this._listeners[type];
+		if (arrayEvent instanceof Array) {
+			for (var i = 0, length = arrayEvent.length; i < length; i += 1) {
+				if (typeof arrayEvent[i] === "function") {
+					arrayEvent[i](param);
+				}
+			}
+		}
 
-    return this;
-  },
+		return this;
+	},
 
-  removeEvent: (type, fn) => {
-    var arrayEvent = this._listeners[type];
-    if (typeof type === "string" && arrayEvent instanceof Array) {
-      if (typeof fn === "function") {
-        for (var i = 0, length = arrayEvent.length; i < length; i += 1) {
-          if (arrayEvent[i] === fn) {
-            this._listeners[type].splice(i, 1);
-            break;
-          }
-        }
-      } else {
-        delete this._listeners[type];
-      }
-    }
+	removeEvent: function (type, fn) {
+		var arrayEvent = this._listeners[type];
+		if (typeof type === "string" && arrayEvent instanceof Array) {
+			if (typeof fn === "function") {
+				for (var i = 0, length = arrayEvent.length; i < length; i += 1) {
+					if (arrayEvent[i] === fn) {
+						this._listeners[type].splice(i, 1);
+						break;
+					}
+				}
+			} else {
+				delete this._listeners[type];
+			}
+		}
 
-    return this;
-  }
+		return this;
+	}
 };

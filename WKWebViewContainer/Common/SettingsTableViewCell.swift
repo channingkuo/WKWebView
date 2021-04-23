@@ -14,7 +14,7 @@ class SettingsTableViewCell: UITableViewCell {
     var toggleCell: ToggleCell!
     var numberCell: NumberCell!
     
-    fileprivate final let rect = CGRect(x: 0, y: 0, width: GlobalViewSettings.tableViewCellWidth, height: GlobalViewSettings.tableViewCellHeight)
+    fileprivate final let rect = CGRect(x: 0, y: 0, width: GlobalSetting.tableViewCellWidth, height: GlobalSetting.tableViewCellHeight)
     
     var identifier: String!
     

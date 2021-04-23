@@ -66,7 +66,7 @@ class SettingsViewController: UIViewController {
 extension SettingsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return GlobalViewSettings.tableViewCellHeight
+        return GlobalSetting.tableViewCellHeight
     }
     
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {

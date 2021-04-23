@@ -2,6 +2,17 @@ document.getElementById("sec").innerHTML = new Date();
 
 localStorage["userInfo"] = JSON.stringify({ token: 'qwertyuioplkjhgfdsazxcvbnm' });
 
+function jSBridgeTest() {
+    var params = {
+        'name': 'hello world jack!!!'
+    };
+
+    KWKJSBridge.command("test", params, res => {
+        document.getElementById('callback').innerHTML = res;
+        
+    });
+}
+
 /**type="text/javascript"
  1.KWKWebView服务器传值固定写法，当然valueName是自己随意定制的
  2.body就是值的内容，也可以传一个空的字符串，具体什么格式自己和后台同事商量测试

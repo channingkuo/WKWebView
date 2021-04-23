@@ -13,11 +13,11 @@
 		D70BEF9B253949CA0020FB30 /* KWKWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70BEF9A253949CA0020FB30 /* KWKWebView.swift */; };
 		D70BEFA02539507F0020FB30 /* FileUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70BEF9F2539507F0020FB30 /* FileUtils.swift */; };
 		D70F3986261D7F9500BDC033 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D70F3985261D7F9500BDC033 /* SnapKit */; };
-		D70F3989261D822700BDC033 /* GlobalViewSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70F3988261D822700BDC033 /* GlobalViewSettings.swift */; };
 		D70F398D261D967200BDC033 /* NumberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70F398C261D967200BDC033 /* NumberCell.swift */; };
 		D71C08D426240D0200443582 /* ImageUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71C08D326240D0200443582 /* ImageUtils.swift */; };
 		D71C08D7262438C400443582 /* PreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71C08D6262438C400443582 /* PreviewController.swift */; };
 		D71C08DC2624394400443582 /* Preview.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D71C08DB2624394400443582 /* Preview.storyboard */; };
+		D720FF2C26326D780048AE91 /* KWKJSCoreBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = D720FF2B26326D780048AE91 /* KWKJSCoreBridge.swift */; };
 		D7356464260896A20000A7F4 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7356463260896A20000A7F4 /* LocationManager.swift */; };
 		D7356468260897400000A7F4 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7356467260897400000A7F4 /* CoreLocation.framework */; };
 		D7382E1F262FED7F00B9C524 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D7382E1E262FED7F00B9C524 /* Alamofire */; };
@@ -33,7 +33,6 @@
 		D77B5568260B20E8005D9F67 /* GlobalSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77B5567260B20E8005D9F67 /* GlobalSettings.swift */; };
 		D796800E2602F4B800731902 /* Extension+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D796800D2602F4B800731902 /* Extension+UIView.swift */; };
 		D79680122602FAE500731902 /* KWKWebViewConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79680112602FAE500731902 /* KWKWebViewConfig.swift */; };
-		D796801626031D5500731902 /* KWKWebViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D796801526031D5500731902 /* KWKWebViewDelegate.swift */; };
 		D796801F26032C4400731902 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D796801E26032C4400731902 /* ProgressView.swift */; };
 		D7B1305B261EF86B00352BFE /* CellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B1305A261EF86B00352BFE /* CellDelegate.swift */; };
 		D7B2FC9026312A4600B4EB04 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2FC8F26312A4600B4EB04 /* ProgressBar.swift */; };
@@ -42,6 +41,8 @@
 		D7B495BB260DE28600BF36F7 /* ToggleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B495BA260DE28600BF36F7 /* ToggleCell.swift */; };
 		D7B948242539713500CF33A6 /* www.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D7B948232539713500CF33A6 /* www.bundle */; };
 		D7BD1EBD26253D6C00AA76AE /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = D7BD1EBC26253D6C00AA76AE /* SDWebImage */; };
+		D7C4219F26327A6A0057C8F4 /* KWKJSThirdBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C4219E26327A6A0057C8F4 /* KWKJSThirdBridge.swift */; };
+		D7C421B02632C3190057C8F4 /* KWKNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C421AF2632C3190057C8F4 /* KWKNavigationDelegate.swift */; };
 		D7CE282C262D853900DA2CC8 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D7CE282B262D853900DA2CC8 /* libz.tbd */; };
 		D7CE2870262D8FFC00DA2CC8 /* GCDWebServerResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = D7CE2854262D8FFC00DA2CC8 /* GCDWebServerResponse.m */; };
 		D7CE2871262D8FFC00DA2CC8 /* GCDWebServerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = D7CE2857262D8FFC00DA2CC8 /* GCDWebServerRequest.m */; };
@@ -67,7 +68,6 @@
 		D7089F6A260477BD00495322 /* ProgressDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressDelegate.swift; sourceTree = "<group>"; };
 		D70BEF9A253949CA0020FB30 /* KWKWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KWKWebView.swift; sourceTree = "<group>"; };
 		D70BEF9F2539507F0020FB30 /* FileUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileUtils.swift; sourceTree = "<group>"; };
-		D70F3988261D822700BDC033 /* GlobalViewSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalViewSettings.swift; sourceTree = "<group>"; };
 		D70F398C261D967200BDC033 /* NumberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberCell.swift; sourceTree = "<group>"; };
 		D71C08CA2623F50C00443582 /* zh-Hans-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans-CN"; path = "zh-Hans-CN.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		D71C08CB2623F50C00443582 /* zh-Hans-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans-CN"; path = "zh-Hans-CN.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -76,6 +76,7 @@
 		D71C08D326240D0200443582 /* ImageUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageUtils.swift; sourceTree = "<group>"; };
 		D71C08D6262438C400443582 /* PreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewController.swift; sourceTree = "<group>"; };
 		D71C08DB2624394400443582 /* Preview.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Preview.storyboard; sourceTree = "<group>"; };
+		D720FF2B26326D780048AE91 /* KWKJSCoreBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KWKJSCoreBridge.swift; sourceTree = "<group>"; };
 		D7356463260896A20000A7F4 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		D7356467260897400000A7F4 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		D7382E21262FEDC300B9C524 /* WwwUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WwwUtils.swift; sourceTree = "<group>"; };
@@ -92,7 +93,6 @@
 		D77B5567260B20E8005D9F67 /* GlobalSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalSettings.swift; sourceTree = "<group>"; };
 		D796800D2602F4B800731902 /* Extension+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIView.swift"; sourceTree = "<group>"; };
 		D79680112602FAE500731902 /* KWKWebViewConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KWKWebViewConfig.swift; sourceTree = "<group>"; };
-		D796801526031D5500731902 /* KWKWebViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KWKWebViewDelegate.swift; sourceTree = "<group>"; };
 		D796801E26032C4400731902 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		D7B1305A261EF86B00352BFE /* CellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellDelegate.swift; sourceTree = "<group>"; };
 		D7B2FC8F26312A4600B4EB04 /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
@@ -100,6 +100,8 @@
 		D7B2FC972631858000B4EB04 /* KWKJSBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KWKJSBridge.swift; sourceTree = "<group>"; };
 		D7B495BA260DE28600BF36F7 /* ToggleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleCell.swift; sourceTree = "<group>"; };
 		D7B948232539713500CF33A6 /* www.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = www.bundle; sourceTree = "<group>"; };
+		D7C4219E26327A6A0057C8F4 /* KWKJSThirdBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KWKJSThirdBridge.swift; sourceTree = "<group>"; };
+		D7C421AF2632C3190057C8F4 /* KWKNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KWKNavigationDelegate.swift; sourceTree = "<group>"; };
 		D7CE282B262D853900DA2CC8 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		D7CE2852262D8FFC00DA2CC8 /* GCDWebServerFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerFunctions.h; sourceTree = "<group>"; };
 		D7CE2853262D8FFC00DA2CC8 /* GCDWebServerPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerPrivate.h; sourceTree = "<group>"; };
@@ -219,9 +221,11 @@
 			children = (
 				D7B2FC9426317F8400B4EB04 /* KWKJSBridge.js */,
 				D7B2FC972631858000B4EB04 /* KWKJSBridge.swift */,
+				D720FF2B26326D780048AE91 /* KWKJSCoreBridge.swift */,
+				D7C4219E26327A6A0057C8F4 /* KWKJSThirdBridge.swift */,
+				D7C421AF2632C3190057C8F4 /* KWKNavigationDelegate.swift */,
 				D70BEF9A253949CA0020FB30 /* KWKWebView.swift */,
 				D79680112602FAE500731902 /* KWKWebViewConfig.swift */,
-				D796801526031D5500731902 /* KWKWebViewDelegate.swift */,
 				D7089F6A260477BD00495322 /* ProgressDelegate.swift */,
 				D796801E26032C4400731902 /* ProgressView.swift */,
 			);
@@ -234,7 +238,6 @@
 				D796800D2602F4B800731902 /* Extension+UIView.swift */,
 				D70BEF9F2539507F0020FB30 /* FileUtils.swift */,
 				D77B5567260B20E8005D9F67 /* GlobalSettings.swift */,
-				D70F3988261D822700BDC033 /* GlobalViewSettings.swift */,
 				D71C08D326240D0200443582 /* ImageUtils.swift */,
 				D700C2EF26201E3700A7AA9A /* LocationUtils.swift */,
 				D7382E21262FEDC300B9C524 /* WwwUtils.swift */,
@@ -402,10 +405,10 @@
 				D700C2F026201E3700A7AA9A /* LocationUtils.swift in Sources */,
 				D7B2FC9026312A4600B4EB04 /* ProgressBar.swift in Sources */,
 				D7CE2873262D8FFC00DA2CC8 /* GCDWebServer.m in Sources */,
-				D796801626031D5500731902 /* KWKWebViewDelegate.swift in Sources */,
-				D70F3989261D822700BDC033 /* GlobalViewSettings.swift in Sources */,
 				D748442D25384C5600BFF55A /* WKWebView.xcdatamodeld in Sources */,
 				D7CE287B262D8FFC00DA2CC8 /* GCDWebServerDataRequest.m in Sources */,
+				D7C421B02632C3190057C8F4 /* KWKNavigationDelegate.swift in Sources */,
+				D720FF2C26326D780048AE91 /* KWKJSCoreBridge.swift in Sources */,
 				D7089F6B260477BD00495322 /* ProgressDelegate.swift in Sources */,
 				D748442325384C5600BFF55A /* AppDelegate.swift in Sources */,
 				D7EE6FFA260C82D9009DB791 /* SettingsTableViewCell.swift in Sources */,
@@ -417,6 +420,7 @@
 				D7CE2874262D8FFC00DA2CC8 /* GCDWebServerConnection.m in Sources */,
 				D7CE2872262D8FFC00DA2CC8 /* GCDWebServerFunctions.m in Sources */,
 				D796801F26032C4400731902 /* ProgressView.swift in Sources */,
+				D7C4219F26327A6A0057C8F4 /* KWKJSThirdBridge.swift in Sources */,
 				D7CE287A262D8FFC00DA2CC8 /* GCDWebServerMultiPartFormRequest.m in Sources */,
 				D7CE2878262D8FFC00DA2CC8 /* GCDWebServerStreamedResponse.m in Sources */,
 				D70BEF9B253949CA0020FB30 /* KWKWebView.swift in Sources */,
@@ -595,6 +599,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = "";
 				"OTHER_SWIFT_FLAGS[arch=*]" = "-DDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = Kuo.WKWebViewContainer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -622,6 +627,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = Kuo.WKWebViewContainer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "WKWebViewContainer/GCDWebServer/WebServer-Bridging-Header.h";
