@@ -182,7 +182,7 @@
 		D748441625384C5600BFF55A = {
 			isa = PBXGroup;
 			children = (
-				D748442125384C5600BFF55A /* WKWebViewContainer */,
+				D748442125384C5600BFF55A /* WKWebView */,
 				D748442025384C5600BFF55A /* Products */,
 				D7356466260897400000A7F4 /* Frameworks */,
 			);
@@ -196,7 +196,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D748442125384C5600BFF55A /* WKWebViewContainer */ = {
+		D748442125384C5600BFF55A /* WKWebView */ = {
 			isa = PBXGroup;
 			children = (
 				D748442225384C5600BFF55A /* AppDelegate.swift */,
@@ -213,7 +213,7 @@
 				D796802426032DEE00731902 /* KWKWebView */,
 				D796802626032E3700731902 /* Utils */,
 			);
-			path = WKWebViewContainer;
+			path = WKWebView;
 			sourceTree = "<group>";
 		};
 		D796802426032DEE00731902 /* KWKWebView */ = {
@@ -593,7 +593,7 @@
 					"$(PROJECT_DIR)/WKWebViewContainer",
 				);
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/incloud/libxml2";
-				INFOPLIST_FILE = WKWebViewContainer/Info.plist;
+				INFOPLIST_FILE = WKWebView/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -603,7 +603,7 @@
 				"OTHER_SWIFT_FLAGS[arch=*]" = "-DDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = Kuo.WKWebViewContainer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "WKWebViewContainer/GCDWebServer/WebServer-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "WKWebView/GCDWebServer/WebServer-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -621,7 +621,7 @@
 					"$(PROJECT_DIR)/WKWebViewContainer",
 				);
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/incloud/libxml2";
-				INFOPLIST_FILE = WKWebViewContainer/Info.plist;
+				INFOPLIST_FILE = WKWebView/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -630,7 +630,7 @@
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = Kuo.WKWebViewContainer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "WKWebViewContainer/GCDWebServer/WebServer-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "WKWebView/GCDWebServer/WebServer-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
