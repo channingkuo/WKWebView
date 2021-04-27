@@ -1,6 +1,6 @@
 //
 //  KWKWebView.swift
-//  WKWebViewContainer
+//  KWKWebView
 //
 //  Created by Channing Kuo on 2020/10/16.
 //
@@ -27,6 +27,9 @@ class KWKWebView: UIView {
     fileprivate var webServer = GCDWebServer()
     
     fileprivate var kWKJSBridge: KWKJSBridge!
+    
+    // iOS14.0以上专有的WKWebView与js回调
+    var replyHandler: ((Any?, String?) -> Void)?
     
     /// WebView配置项
     var webConfig: KWKWebViewConfig?
@@ -66,6 +69,7 @@ class KWKWebView: UIView {
         let userContentController = WKUserContentController()
         let wkUserScript = WKUserScript(source: kWKJSBridge.wkUserScript(), injectionTime: .atDocumentStart, forMainFrameOnly: true)
         userContentController.addUserScript(wkUserScript)
+        
         if #available(iOS 14, *) {
             _ = webConfig.scriptMessageHandlerArray.map{userContentController.addScriptMessageHandler(kWKJSBridge, contentWorld: .page, name: $0)}
         } else {
@@ -104,7 +108,7 @@ class KWKWebView: UIView {
         
         switch kWKWebLoadType {
         case .HTML(let fileName):
-            if !webConfig!.enableWebServer {
+            if webConfig!.enableWebServer {
                 loadLocalWebServerHTML(fileName: fileName)
             } else {
                 loadLocalHTML(fileName: fileName)
@@ -192,6 +196,7 @@ class KWKWebView: UIView {
         webView.load(request)
     }
     
+    /// 监听web加载进度，用于控制加载进度view的展示
     open override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "estimatedProgress"{
             self.progressDelegate?.estimatedProgress(webView, estimatedProgress: webView.estimatedProgress)
@@ -202,7 +207,7 @@ class KWKWebView: UIView {
 // MARK: - WKNavigationDelegate
 extension KWKWebView: WKNavigationDelegate {
 
-    /// 服务器开始请求的时候调用
+    /// web发起的所有请求会走这个管道，可以控制请求的状态
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         self.delegate.webView(webView, decidePolicyFor: navigationAction, decisionHandler: decisionHandler)
     }

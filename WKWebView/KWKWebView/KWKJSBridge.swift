@@ -37,7 +37,7 @@ class KWKJSBridge: NSObject {
         
         if pluginClass?.responds(to: selector) != nil {
             let performClass = pluginClass?.init()
-            performClass?.perform(selector, with: params, with: self.webView)
+            performClass?.perform(selector, with: params, with: webView)
         }
         
         // TODO 记录历史操作
@@ -65,7 +65,7 @@ extension KWKJSBridge: WKScriptMessageHandler {
 }
 
 // MARK: - WKScriptMessageHandlerWithReply
-/// available(iOS 14, *)
+@available(iOS 14.0, *)
 extension KWKJSBridge: WKScriptMessageHandlerWithReply {
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage, replyHandler: @escaping (Any?, String?) -> Void) {
@@ -80,34 +80,9 @@ extension KWKJSBridge: WKScriptMessageHandlerWithReply {
                 "callbackId": body["callbackId"].stringValue
             ]
             
+            webView.replyHandler = replyHandler
+            
             reflectPlugin(plugin, funcName: funcName, params: dictionary)
         }
     }
-}
-
-enum ViewActionMode: String {
-    
-    /// js 打开原生页面
-    case OpenSettings = "openSettings"
-    
-    /// 重新加载WKWebView
-    case Reload = "reload"
-    
-    /// WKWebView返回
-    case Back = "goBack"
-    
-    /// WKWebView前进
-    case Forward = "goForward"
-    
-    /// 获取定位经纬度
-    case Location = "location"
-    
-    /// 打开箱机拍照或选取相册照片
-    case Image = "image"
-    
-    /// 预览图片
-    case Preview = "preview"
-    
-    /// 呼叫电话
-    case Call = "call"
 }

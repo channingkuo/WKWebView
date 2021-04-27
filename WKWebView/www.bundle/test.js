@@ -3,14 +3,9 @@ document.getElementById("sec").innerHTML = new Date();
 localStorage["userInfo"] = JSON.stringify({ token: 'qwertyuioplkjhgfdsazxcvbnm' });
 
 function jSBridgeTest() {
-    var params = {
-        'name': 'hello world jack!!!'
-    };
-
-    KWKJSBridge.command("test", params, res => {
+    kWkJsBridge.test(res => {
         document.getElementById('callback').innerHTML = res;
-        
-    });
+    })
 }
 
 /**type="text/javascript"

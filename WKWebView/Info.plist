@@ -2,14 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>选取相册照片需要相册权限</string>
-	<key>NSCameraUsageDescription</key>
-	<string>拍照需要相机权限</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>导航需要定位信息</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>导航需要定位信息</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -35,6 +27,14 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>拍照需要相机权限</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>导航需要定位信息</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>导航需要定位信息</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>选取相册照片需要相册权限</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

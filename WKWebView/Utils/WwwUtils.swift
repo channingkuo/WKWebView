@@ -34,7 +34,7 @@ class WwwUtils {
                 #if DEBUG
                 print("check HTML version error.")
                 #endif
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "htmlVersionUpdateFailed"), object: nil)
+//                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "htmlVersionUpdateFailed"), object: nil)
             }
         }
     }

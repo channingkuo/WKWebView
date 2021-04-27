@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  WKWebViewContainer
+//  KWKWebView
 //
 //  Created by Channing Kuo on 2020/10/15.
 //
@@ -8,9 +8,8 @@
 import UIKit
 import WebKit
 import SwiftyJSON
-import CoreLocation
 
-class ViewController: UIViewController, UINavigationControllerDelegate {
+class ViewController: UIViewController {
     
     @IBOutlet weak var progressView: ProgressView!
     @IBOutlet weak var kWKWebView: KWKWebView!
@@ -19,9 +18,6 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
     
     fileprivate var downloadingView: ProgressBar!
     fileprivate var downloadingViewPresented: Bool = false
-    
-    // iOS13.0以上专有的WKWebView与js回调
-    fileprivate var replyHandler: ((Any?, String?) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()

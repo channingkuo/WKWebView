@@ -31,7 +31,7 @@ class LocationManager: NSObject {
     func startUpdatingLocation(_ viewCtrl: UIViewController, distanceFilter: Double?) {
         viewController = viewCtrl
         self.distanceFilter = distanceFilter
-        delegate = viewCtrl as? LocationProtocol
+//        delegate = viewCtrl as? LocationProtocol
         
         if locationManager != nil && CLLocationManager.authorizationStatus() == .denied {
             requestAuthorizationAlert(viewCtrl)

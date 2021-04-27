@@ -106,32 +106,37 @@ extension KWKNavigationDelegate: WKWebViewDelegate {
         print("加载完成!")
         #endif
         
-//        let js = """
-//            return localStorage['userInfo'];
-//        """
-//        if #available(iOS 14.0, *) {
-//            kWKWebView.callAsyncJavaScript(javaScript: js) {
-//                result in
-//                switch result {
-//                case .success(let resp):
-//                    let userInfo = JSON(parseJSON: resp as? String ?? "")
-//                    print(userInfo["token"].stringValue)
-//                    break
-//                case .failure(_):
-//                    // TODO 拿不到token信息，看情况需不需要跳到登录页面
-//                    break
-//                }
-//            }
-//        } else {
-//            // TODO 获取web localStorage中token信息
-//            kWKWebView.excuteJavaScript(javaScript: js)
-//        }
+        // TODO 获取web localStorage中token信息
+        // TODO 可以做一些应用的调试信息的log收集
+        let js = """
+            return localStorage['userInfo'];
+        """
+        if #available(iOS 14.0, *) {
+            webView.callAsyncJavaScript(js, arguments: [:], in: nil, in: .defaultClient) { result in
+                // TODO 执行完swift发起的脚本后处理逻辑
+                switch result {
+                case .success(let resp):
+                    debugPrint(resp)
+                    break
+                case .failure(let err):
+                    debugPrint(err)
+                    break
+                }
+            }
+        } else {
+            webView.evaluateJavaScript(js) { result, error in
+                // TODO 执行完swift发起的脚本后处理逻辑
+                // 可以通过从swift执行JSBridge，从而获取web返回的值
+            }
+        }
     }
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         #if DEBUG
         print("加载失败!")
         #endif
+        
+        // TODO 收集log，记录加载失败现场
     }
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {

@@ -590,7 +590,7 @@
 				DEVELOPMENT_TEAM = 4S5QJYZKK2;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/WKWebViewContainer",
+					"$(PROJECT_DIR)/WKWebView",
 				);
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/incloud/libxml2";
 				INFOPLIST_FILE = WKWebView/Info.plist;
@@ -601,7 +601,7 @@
 				);
 				OTHER_LDFLAGS = "";
 				"OTHER_SWIFT_FLAGS[arch=*]" = "-DDEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = Kuo.WKWebViewContainer;
+				PRODUCT_BUNDLE_IDENTIFIER = Kuo.WKWebView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "WKWebView/GCDWebServer/WebServer-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -618,7 +618,7 @@
 				DEVELOPMENT_TEAM = 4S5QJYZKK2;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/WKWebViewContainer",
+					"$(PROJECT_DIR)/WKWebView",
 				);
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/incloud/libxml2";
 				INFOPLIST_FILE = WKWebView/Info.plist;
@@ -628,7 +628,7 @@
 					"@executable_path/Frameworks",
 				);
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = Kuo.WKWebViewContainer;
+				PRODUCT_BUNDLE_IDENTIFIER = Kuo.WKWebView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "WKWebView/GCDWebServer/WebServer-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
