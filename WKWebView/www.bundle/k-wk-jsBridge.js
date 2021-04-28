@@ -1,6 +1,6 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', { value: true });
+//Object.defineProperty(exports, '__esModule', { value: true });
 var KWKJSB = /** @class */ (function () {
     function KWKJSB () {
         // this._KWKJSBridge = KWKJSBridge;
@@ -63,19 +63,19 @@ var KWKJSB = /** @class */ (function () {
 
         KWKJSBridge.command('location', params, callback);
     };
-
+    
     /**
-     * 获取照片
-     * @param {number} type type: 0调起相机拍摄照片，type: 1调起相册选择照片
-     * @param {boolean} allowsEditing 能否编辑
-     * @param {(data) => void} callback 回调方法获取返回值
-     */
+      * 获取照片
+      * @param {number} type type: 0调起相机拍摄照片，type: 1调起相册选择照片
+      * @param {boolean} allowsEditing 能否编辑
+      * @param {(data) => void} callback 回调方法获取返回值
+      */
     KWKJSB.choosePhoto = function (type, allowsEditing, callback) {
         const params = {
             'type': type,
             'allowsEditing': allowsEditing
         };
-
+        
         KWKJSBridge.command('choosePhoto', params, callback);
     };
 
@@ -106,4 +106,4 @@ var KWKJSB = /** @class */ (function () {
     return KWKJSB;
 }());
 
-exports.KWKJSB = KWKJSB;
+//exports.KWKJSB = KWKJSB;

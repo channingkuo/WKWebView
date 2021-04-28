@@ -15,6 +15,8 @@ class PreviewController: UIViewController {
     /// 预览图片的本地路径、base64、http/https网络地址
     var imageData: String?
     
+    fileprivate var scaled: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,11 +24,14 @@ class PreviewController: UIViewController {
         
         previewImage.isUserInteractionEnabled = true
         
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissBack)))
         previewImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissBack)))
         
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panGestureHandler))
-        panGestureRecognizer.maximumNumberOfTouches = 1
+        panGestureRecognizer.maximumNumberOfTouches = 2
         previewImage.addGestureRecognizer(panGestureRecognizer)
+        
+//        previewImage.addGestureRecognizer(UIPinchGestureRecognizer(target: self, action: #selector(pinchGestureHandler)))
         
         setupImage()
     }
@@ -54,31 +59,55 @@ class PreviewController: UIViewController {
         var currentRate = 1 - translation.y / viewHeight * 2.5
         currentRate = currentRate > 1 ? 1 : currentRate
         currentRate = currentRate < 0 ? 0 : currentRate
-        
-        if sender.state == .began || sender.state == .changed {
-            if translation.y > 0 {
-                self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: currentRate)
                 
+        if scaled {
+            // TODO 调整视窗展示图片
+//            let transform = CGAffineTransform(translationX: previewImage.transform.tx + translation.x, y: previewImage.transform.ty + translation.y)
+//            previewImage.transform = transform
+//            previewImage.largeContentImageInsets
+        } else {
+            if sender.state == .began || sender.state == .changed {
+                self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: currentRate)
+                    
                 let imageScaleRate = currentRate < 0.1 ? 0.1 : currentRate
                 let transform = CGAffineTransform(a: imageScaleRate, b: 0, c: 0, d: imageScaleRate, tx: translation.x, ty: translation.y)
                 previewImage.transform = transform
             }
+            if sender.state == .ended {
+                // 模仿iOS 相册，移动超过100就自动关闭
+                if translation.y >= 100 {
+                    UIView.animate(withDuration: 0.3, animations: {
+                        self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
+                        self.previewImage.transform = CGAffineTransform(translationX: 0, y: viewHeight)
+                    }, completion: { _ in
+                        self.dismissBack()
+                    })
+                } else {
+                    UIView.animate(withDuration: 0.3, animations: {
+                        self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
+                        self.previewImage.transform = CGAffineTransform.identity
+                    })
+                }
+            }
+        }
+    }
+    
+    @objc func pinchGestureHandler(_ sender: UIPinchGestureRecognizer) {
+        let scale = sender.scale
+        
+        if sender.state == .began || sender.state == .changed {
+            self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: scale)
+            let transform = CGAffineTransform(a: scale, b: 0, c: 0, d: scale, tx: 0, ty: 0)
+            previewImage.transform = transform
         }
         if sender.state == .ended {
-            // TODO 可以计算拉动的加速度来判断是否要关闭
-            if translation.y >= viewHeight / 2.5 {
-                UIView.animate(withDuration: 0.3, animations: {
-                    self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
-                    self.previewImage.transform = CGAffineTransform(translationX: 0, y: viewHeight)
-                }, completion: { _ in
-                    self.dismissBack()
-                })
-            } else {
+            if scale <= 1 {
                 UIView.animate(withDuration: 0.3, animations: {
                     self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
                     self.previewImage.transform = CGAffineTransform.identity
                 })
             }
+            scaled = scale > 1
         }
     }
     

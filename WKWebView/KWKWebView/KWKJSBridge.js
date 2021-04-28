@@ -4,7 +4,7 @@ const KWKJSBridge = {
 		var message;
 		var body;
 		var plugin = 'KWKJSCoreBridge';
-		var callbackId = Math.floor(Math.random() * 2000000000);
+		var callbackId = '' + Math.floor(Math.random() * 2000000000);
 
 		if (callback) {
 			if (!KWKJSBridgeEvent._listeners[callbackId]) {
@@ -21,9 +21,12 @@ const KWKJSBridge = {
 		message = { body: body };
         window.webkit.messageHandlers.kWKWebView.postMessage(message).then(function (resp) {
             if (callback) {
-                KWKJSBridge.callback(callbackId, resp)
+                KWKJSBridge.callback(callbackId, resp);
             }
-        }).catch(function (err) {});
+        }).catch(function (err) {
+            console.error(err);
+            KWKJSBridgeEvent.removeEvent(callbackId);
+        });
 	},
 
 	callback: (callbackId, data) => {

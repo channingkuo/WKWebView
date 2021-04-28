@@ -12,12 +12,8 @@
 </head>
   <body>
       <div>
-          <button onclick="test()">测试js传值到原生</button>
-          
           <button onclick="openSettings()">打开设置</button>
-          
           <button onclick="getLocation()">获取定位信息</button>
-          
           <button onclick="chooseImage(0)">打开相机</button>
           <button onclick="chooseImage(1)">选择相册</button>
           <img id="chooseImage" style="width: 100px" onclick="previewImageTest()" />
@@ -28,7 +24,7 @@
       </div>
       <div id="sec"></div>
       <div id="callback"></div>
-      <!--defer  type="module"-->
+      <script src="k-wk-jsBridge.js"></script>
       <script src="test.js"></script>
  </body>
 </html>

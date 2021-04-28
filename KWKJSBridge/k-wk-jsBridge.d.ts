@@ -1,5 +1,5 @@
 /**
- *
+ * k-wk-jsBridge.d.ts
  */
 export declare class KWKJSB {
 
@@ -36,4 +36,24 @@ export declare class KWKJSB {
      * @param {(data) => void} callback 回调方法获取返回值
      */
     static location(precision: number, callback?: (data: any) => void): void
+
+    /**
+     * 获取照片
+     * @param {number} type type: 0调起相机拍摄照片，type: 1调起相册选择照片
+     * @param {boolean} allowsEditing 能否编辑
+     * @param {(data) => void} callback 回调方法获取返回值
+     */
+    static choosePhoto(type: number, allowsEditing: boolean, callback?: (data: any) => void): void
+
+    /**
+     * 预览图片
+     * @param {string} imageUrl 图片路径：可以是网络路径、可以是base64、可以是本地路径
+     */
+    static previewImage(imageUrl: string): void
+
+    /**
+     * 调起打电话
+     * @param {string} phoneNumber 电话号码：手机、固话
+     */
+    static call(phoneNumber: string): void
 }

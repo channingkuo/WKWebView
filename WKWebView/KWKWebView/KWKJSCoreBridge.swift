@@ -16,12 +16,19 @@ import CoreLocation
 /// - webview : web container WKWebView
 class KWKJSCoreBridge: NSObject {
     
+    static let sharedInstance: KWKJSCoreBridge = {
+        let instance = KWKJSCoreBridge()
+        return instance
+    }()
+    
     fileprivate var webView: KWKWebView?
+    fileprivate var callbackId: String?
     
     @objc func test(_ params: Dictionary<String, Any>, webView: KWKWebView) {
         debugPrint(params)
         
         let callbackId = params["callbackId"] as! String
+        self.callbackId = callbackId
         
         if #available(iOS 14, *) {
             webView.replyHandler!(arc4random() % 100, nil)
@@ -31,7 +38,8 @@ class KWKJSCoreBridge: NSObject {
     }
     
     @objc func openSettings(_ params: Dictionary<String, Any>, webView: KWKWebView) {
-        let mode = params["mode"] as? Int ?? 0
+        let jsonParams = JSON(params["params"] as! Dictionary<String, Any>)
+        let mode = jsonParams["mode"].int ??  0
         
         let settingsStoryboard = UIStoryboard.init(name: "Settings", bundle: nil)
         let settingsViewCtrl = settingsStoryboard.instantiateViewController(identifier: "Settings") as SettingsViewController
@@ -67,7 +75,11 @@ class KWKJSCoreBridge: NSObject {
     @objc func location(_ params: Dictionary<String, Any>, webView: KWKWebView) {
         self.webView = webView
         
-        let distance = params["precision"] as? Double ?? 100
+        let jsonParams = JSON(params["params"] as! Dictionary<String, Any>)
+        
+        let distance = jsonParams["precision"].double ?? 100
+        let callbackId = params["callbackId"] as! String
+        self.callbackId = callbackId
         
         let rootViewController: UIViewController?
         if #available(iOS 13.0, *) {
@@ -76,16 +88,20 @@ class KWKJSCoreBridge: NSObject {
             rootViewController = UIApplication.shared.keyWindow?.rootViewController
         }
         
-        let locationManager = LocationManager.sharedInstance
+        let locationManager = KLocationManager(rootViewController!, delegate: self)
         locationManager.delegate = self
-        locationManager.startUpdatingLocation(rootViewController!, distanceFilter: distance)
+        locationManager.startUpdatingLocation(distanceFilter: distance)
     }
     
     @objc func choosePhoto(_ params: Dictionary<String, Any>, webView: KWKWebView) {
-        self.webView = webView
+        KWKJSCoreBridge.sharedInstance.webView = webView
         
-        let type = params["type"] as? Int ?? 0
-        let allowsEditing = params["allowsEditing"] as? Bool ?? false
+        let jsonParams = JSON(params["params"] as! Dictionary<String, Any>)
+        
+        let type = jsonParams["type"].int ?? 0
+        let allowsEditing = jsonParams["allowsEditing"].bool ?? false
+        let callbackId = params["callbackId"] as! String
+        KWKJSCoreBridge.sharedInstance.callbackId = callbackId
         
         let rootViewController: UIViewController?
         if #available(iOS 13.0, *) {
@@ -120,7 +136,9 @@ class KWKJSCoreBridge: NSObject {
     }
     
     @objc func previewImage(_ params: Dictionary<String, Any>, webView: KWKWebView) {
-        let data = params["data"] as? String
+        let jsonParams = JSON(params["params"] as! Dictionary<String, Any>)
+        
+        let data = jsonParams["data"].string
         
         if nil != data && !data!.isEmpty {
             let previewStoryboard = UIStoryboard.init(name: "Preview", bundle: nil)
@@ -141,7 +159,9 @@ class KWKJSCoreBridge: NSObject {
     }
     
     @objc func call(_ params: Dictionary<String, Any>, webView: KWKWebView) {
-        let phoneNumber = params["phoneNumber"] as? String
+        let jsonParams = JSON(params["params"] as! Dictionary<String, Any>)
+        
+        let phoneNumber = jsonParams["phoneNumber"].string
         
         if nil != phoneNumber && !phoneNumber!.isEmpty {
             let callWebView = WKWebView()
@@ -156,16 +176,24 @@ class KWKJSCoreBridge: NSObject {
     }
 }
 
-// MARK: - CLLocationManagerDelegate
-extension KWKJSCoreBridge: LocationProtocol {
+// MARK: - LocationDelegate
+extension KWKJSCoreBridge: LocationDelegate {
 
-    func coordinateUpdated(latitude: Double, longitude: Double, placemarks: [CLPlacemark]?) {
-        let json = JSON(["latitude": latitude, "longitude": longitude, "placemarks": placemarks ?? []] as [String : Any])
+    func coordinateUpdated(latitude: Double, longitude: Double, pois: [Poi]) {
+        let locationBridge = LocationBridge(latitude: latitude, longitude: longitude, pois: pois)
 
+        let encoder = JSONEncoder()
+        let jsonData = try? encoder.encode(locationBridge)
+        let json = String(data: jsonData!, encoding: .utf8)
+        
         if #available(iOS 14, *) {
-            self.webView!.replyHandler!(json.rawString(), nil)
+            if self.webView!.replyHandler != nil {
+                self.webView!.replyHandler!(json, nil)
+            }
         } else {
-            self.webView!.excuteJavaScript(javaScript: "")
+            if callbackId != nil && !callbackId!.isEmpty {
+                self.webView!.excuteJavaScript(javaScript: "KWKJSBridge.callback('\(callbackId ?? "")', '\(json ?? "")');")
+            }
         }
     }
 }
@@ -187,22 +215,28 @@ extension KWKJSCoreBridge: UIImagePickerControllerDelegate, UINavigationControll
         } else {
             image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
         }
-
-        let json = JSON(["url": url.absoluteString, "base64": ImageUtils.imageToBase64String(image: image)] as [String : String?])
+        
+        let encoder = JSONEncoder()
+        let jsonData = try? encoder.encode(["url": url.absoluteString, "base64": ImageUtils.imageToBase64String(image: image)])
+        let json = String(data: jsonData!, encoding: .utf8)
 
         if #available(iOS 14, *) {
             // 直接返回Promise
-            self.webView!.replyHandler!(json.rawString(), nil)
+            if KWKJSCoreBridge.sharedInstance.webView!.replyHandler != nil {
+                KWKJSCoreBridge.sharedInstance.webView!.replyHandler!(json, nil)
+            }
         } else {
-            self.webView!.excuteJavaScript(javaScript: "")
+            if callbackId != nil && !callbackId!.isEmpty {
+                KWKJSCoreBridge.sharedInstance.webView!.excuteJavaScript(javaScript: "KWKJSBridge.callback('\(KWKJSCoreBridge.sharedInstance.callbackId ?? "")', '\(json ?? "")');")
+            }
         }
     }
 
-    fileprivate func presentImagePickerController(_ viewCtrl: UIViewController, sourceType: UIImagePickerController.SourceType, allowsEditing: Bool) {
+    func presentImagePickerController(_ viewCtrl: UIViewController, sourceType: UIImagePickerController.SourceType, allowsEditing: Bool) {
         let imagePickerCtrl = UIImagePickerController()
         imagePickerCtrl.allowsEditing = allowsEditing
         imagePickerCtrl.sourceType = sourceType
-        imagePickerCtrl.delegate = self
+        imagePickerCtrl.delegate = KWKJSCoreBridge.sharedInstance
 
         viewCtrl.present(imagePickerCtrl, animated: true, completion: nil)
     }
