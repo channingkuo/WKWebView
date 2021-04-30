@@ -107,10 +107,10 @@ class FileUtils {
         let wwwPathContent = try? manager.contentsOfDirectory(atPath: wwwPath)
         if wwwPathContent == nil {
             do {
-                debugPrint("try create dir \(wwwPath)")
+                debugPrint("try to create dir \(wwwPath)")
                 try manager.createDirectory(atPath: wwwPath, withIntermediateDirectories: true, attributes: nil)
             } catch let error as NSError {
-                print("create dir \(wwwPath) error \(error.localizedDescription)")
+                debugPrint("create dir \(wwwPath) error \(error.localizedDescription)")
             }
         }
         
@@ -141,7 +141,7 @@ class FileUtils {
                 
                 try Zip.unzipFile(zipFileURL!, destination: wwwURL!, overwrite: true, password: nil)
             } catch let error as NSError {
-                print("unzip the www.zip error: \(error.localizedDescription)")
+                debugPrint("unzip the www.zip error: \(error.localizedDescription)")
             }
         }
     }

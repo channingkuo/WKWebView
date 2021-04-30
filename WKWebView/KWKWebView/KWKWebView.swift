@@ -108,7 +108,7 @@ class KWKWebView: UIView {
         
         switch kWKWebLoadType {
         case .HTML(let fileName):
-            if webConfig!.enableWebServer {
+            if !webConfig!.enableWebServer {
                 loadLocalWebServerHTML(fileName: fileName)
             } else {
                 loadLocalHTML(fileName: fileName)
@@ -169,14 +169,16 @@ class KWKWebView: UIView {
     }
     
     fileprivate func loadLocalHTML(fileName: String?) {
-        let wwwBundleURL = Bundle.main.url(forResource: "www", withExtension: "bundle")!
         let htmlPath = FileUtils.cachesFolder() + "/www"
+        let htmlURL = URL(string: htmlPath)!
+        let htmlFileURL = URL(fileURLWithPath: htmlPath + "/\(fileName ?? "index").html")
         
-//        let htmlFileURL = URL(fileURLWithPath: htmlPath + "/\(fileName ?? "index").html")
-//        webView.loadFileURL(htmlFileURL, allowingReadAccessTo: htmlURL)
+        webView.loadFileURL(htmlFileURL, allowingReadAccessTo: htmlURL)
         
-        let htmlFileURL = URL(fileURLWithPath: wwwBundleURL.path + "/test.html")
-        webView.loadFileURL(htmlFileURL, allowingReadAccessTo: wwwBundleURL)
+//        let wwwBundleURL = Bundle.main.url(forResource: "www", withExtension: "bundle")!
+//        let htmlFileURL = URL(fileURLWithPath: wwwBundleURL.path + "/test.html")
+//
+//        webView.loadFileURL(htmlFileURL, allowingReadAccessTo: wwwBundleURL)
     }
     
     fileprivate func loadLocalWebServerHTML(fileName: String?) {

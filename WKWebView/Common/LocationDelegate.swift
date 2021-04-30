@@ -8,7 +8,7 @@
 import Foundation
 import CoreLocation
 
-protocol LocationDelegate: class {
+protocol LocationDelegate: AnyObject {
     
     func coordinateUpdated(latitude: Double, longitude: Double, pois: [Poi])
 }

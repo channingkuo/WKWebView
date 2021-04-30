@@ -8,7 +8,7 @@
 import Foundation
 import WebKit
 
-protocol ProgressDelegate: class {
+protocol ProgressDelegate: AnyObject {
     
     /// WKWebview 加载进度
     func estimatedProgress(_ webView: WKWebView, estimatedProgress progress: Double)
