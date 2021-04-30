@@ -89,7 +89,7 @@ class KWKJSCoreBridge: NSObject {
         }
         
         let locationManager = KLocationManager(rootViewController!, delegate: self)
-        locationManager.delegate = self
+        locationManager.delegate = KWKJSCoreBridge.sharedInstance
         locationManager.startUpdatingLocation(distanceFilter: distance)
     }
     
@@ -187,12 +187,12 @@ extension KWKJSCoreBridge: LocationDelegate {
         let json = String(data: jsonData!, encoding: .utf8)
         
         if #available(iOS 14, *) {
-            if self.webView!.replyHandler != nil {
-                self.webView!.replyHandler!(json, nil)
+            if KWKJSCoreBridge.sharedInstance.webView!.replyHandler != nil {
+                KWKJSCoreBridge.sharedInstance.webView!.replyHandler!(json, nil)
             }
         } else {
             if callbackId != nil && !callbackId!.isEmpty {
-                self.webView!.excuteJavaScript(javaScript: "KWKJSBridge.callback('\(callbackId ?? "")', '\(json ?? "")');")
+                KWKJSCoreBridge.sharedInstance.webView!.excuteJavaScript(javaScript: "KWKJSBridge.callback('\(callbackId ?? "")', '\(json ?? "")');")
             }
         }
     }

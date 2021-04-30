@@ -102,34 +102,47 @@ class FileUtils {
     }
     
     class func setupHtml() {
-        let wwwBundleURL = Bundle.main.url(forResource: "www", withExtension: "bundle")!
-        
         let manager = FileManager.default
-        let wwwPath = try? manager.contentsOfDirectory(atPath: wwwBundleURL.path + "/www")
-        let wwwPathURL = wwwBundleURL.appendingPathComponent("www", isDirectory: true)
-        if wwwPath == nil {
-            try? manager.createDirectory(atPath: wwwPathURL.path, withIntermediateDirectories: true, attributes: nil)
+        let wwwPath = cachesFolder() + "/www"
+        let wwwPathContent = try? manager.contentsOfDirectory(atPath: wwwPath)
+        if wwwPathContent == nil {
+            do {
+                debugPrint("try create dir \(wwwPath)")
+                try manager.createDirectory(atPath: wwwPath, withIntermediateDirectories: true, attributes: nil)
+            } catch let error as NSError {
+                print("create dir \(wwwPath) error \(error.localizedDescription)")
+            }
         }
         
-        let fileArray = manager.subpaths(atPath: wwwPathURL.path)
+        let fileArray = manager.subpaths(atPath: wwwPath)
         // 如果www目录为空则解压缩一份bundle里面的www.zip，不为空则使用缓存
-        if fileArray != nil && fileArray!.count <= 0 {
-            let zipURL = wwwBundleURL.appendingPathComponent("www.zip")
-            unZipWWW(zipURL)
+        if fileArray == nil || fileArray!.count <= 0 {
+            unZipWWW()
         }
     }
     
-    class func unZipWWW(_ zipFilePath: URL) {
+    class func unZipWWW() {
         let wwwBundleURL = Bundle.main.url(forResource: "www", withExtension: "bundle")!
         
-        // document下没有www.zip，则拷贝一份bundle里面的www.zip到document
+        // Caches目录 ./Documents/Library/Caches下没有www.zip，则拷贝一份bundle里面的www.zip到Caches
         let manager = FileManager.default
-        if !manager.fileExists(atPath: zipFilePath.path) {
-            try? manager.copyItem(atPath: wwwBundleURL.appendingPathComponent("www.zip").path, toPath: zipFilePath.path)
+        let zipPath = cachesFolder() + "/www.zip"
+        if !manager.fileExists(atPath: zipPath) {
+            try? manager.copyItem(atPath: wwwBundleURL.appendingPathComponent("www.zip").path, toPath: zipPath)
         }
         
-        deleteFile(path: wwwBundleURL.appendingPathComponent("www", isDirectory: true).path) {
-            try? Zip.unzipFile(zipFilePath, destination: wwwBundleURL, overwrite: true, password: nil)
+        let wwwPath = cachesFolder() + "/www"
+        deleteFile(path: wwwPath) {
+            do {
+                debugPrint("unzip the www.zip: \(cachesFolder() + "/www.zip")")
+                
+                let zipFileURL = URL(string: cachesFolder() + "/www.zip")
+                let wwwURL = URL(string: cachesFolder())
+                
+                try Zip.unzipFile(zipFileURL!, destination: wwwURL!, overwrite: true, password: nil)
+            } catch let error as NSError {
+                print("unzip the www.zip error: \(error.localizedDescription)")
+            }
         }
     }
 }

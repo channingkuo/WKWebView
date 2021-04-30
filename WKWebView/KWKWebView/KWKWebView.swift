@@ -108,7 +108,7 @@ class KWKWebView: UIView {
         
         switch kWKWebLoadType {
         case .HTML(let fileName):
-            if !webConfig!.enableWebServer {
+            if webConfig!.enableWebServer {
                 loadLocalWebServerHTML(fileName: fileName)
             } else {
                 loadLocalHTML(fileName: fileName)
@@ -170,9 +170,9 @@ class KWKWebView: UIView {
     
     fileprivate func loadLocalHTML(fileName: String?) {
         let wwwBundleURL = Bundle.main.url(forResource: "www", withExtension: "bundle")!
-        let htmlURL = wwwBundleURL.appendingPathComponent("www", isDirectory: true)
+        let htmlPath = FileUtils.cachesFolder() + "/www"
         
-//        let htmlFileURL = URL(fileURLWithPath: htmlURL.path + "/\(fileName ?? "index").html")
+//        let htmlFileURL = URL(fileURLWithPath: htmlPath + "/\(fileName ?? "index").html")
 //        webView.loadFileURL(htmlFileURL, allowingReadAccessTo: htmlURL)
         
         let htmlFileURL = URL(fileURLWithPath: wwwBundleURL.path + "/test.html")
@@ -180,10 +180,9 @@ class KWKWebView: UIView {
     }
     
     fileprivate func loadLocalWebServerHTML(fileName: String?) {
-        let wwwBundleURL = Bundle.main.url(forResource: "www", withExtension: "bundle")!
-        let htmlURL = wwwBundleURL.appendingPathComponent("www", isDirectory: true)
+        let htmlPath = FileUtils.cachesFolder() + "/www"
         
-        webServer.addGETHandler(forBasePath: "/", directoryPath: htmlURL.path, indexFilename: "/\(fileName ?? "index")", cacheAge: 3600, allowRangeRequests: true)
+        webServer.addGETHandler(forBasePath: "/", directoryPath: htmlPath, indexFilename: "/\(fileName ?? "index")", cacheAge: 3600, allowRangeRequests: true)
         webServer.addHandler(forMethod: "GET", path: "/", request: GCDWebServerRequest.self) {
             request -> GCDWebServerResponse in
             let url = URL(string: "\(fileName ?? "index").html", relativeTo: request.url)

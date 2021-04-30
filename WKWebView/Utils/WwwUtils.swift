@@ -42,8 +42,8 @@ class WwwUtils {
     /// download html www.zip
     class func downloadFile(_ url: String) {
         let destination: DownloadRequest.Destination = { _, _ in
-            let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-            let fileURL = documentsURL.appendingPathComponent("www.zip")
+            let cachesURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
+            let fileURL = cachesURL.appendingPathComponent("www.zip")
             
             return (fileURL, [.removePreviousFile, .createIntermediateDirectories])
         }
@@ -56,7 +56,7 @@ class WwwUtils {
                 #if DEBUG
                 print(fileURL.path)
                 #endif
-                FileUtils.unZipWWW(fileURL)
+                FileUtils.unZipWWW()
                 
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "htmlVersionUpdated"), object: nil)
             } else {
