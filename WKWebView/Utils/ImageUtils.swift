@@ -22,9 +22,9 @@ class ImageUtils {
     }
     
     // UIImage -> Base64
-    class func imageToBase64String(image: UIImage, headerSign: Bool = false) -> String? {
+    class func imageToBase64String(image: UIImage, headerSign: Bool = false, compressionQuality: CGFloat = 0.8) -> String? {
         // 根据图片得到对应的二进制编码
-        guard let imageData = image.pngData() else {
+        guard let imageData = image.jpegData(compressionQuality: compressionQuality) else {
             return nil
         }
         // 根据二进制编码得到对应的base64字符串
@@ -32,18 +32,18 @@ class ImageUtils {
         // 判断是否需要带有头部base64标识信息
         if headerSign {
             // 根据格式拼接数据头 添加header信息，扩展名信息
-            base64String = "data:image/png;base64," + base64String
+            base64String = "data:image/jpg;base64," + base64String
         }
         return base64String
     }
     
     // image's Name -> Base64
-    class func imageToBase64String(imageName: String, headerSign: Bool = false) -> String? {
+    class func imageToBase64String(imageName: String, headerSign: Bool = false, compressionQuality: CGFloat = 0.8) -> String? {
         //根据名称获取图片
         guard let image: UIImage = UIImage.init(named: imageName) else {
             return nil
         }
-        return self.imageToBase64String(image: image, headerSign: headerSign)
+        return self.imageToBase64String(image: image, headerSign: headerSign, compressionQuality: compressionQuality)
     }
     
     // Base64 -> UIImage
@@ -64,6 +64,25 @@ class ImageUtils {
             return nil
         }
         return codeImage
+    }
+    
+    // identityImage
+    class func identityImage(image: UIImage) -> UIImage {
+        UIGraphicsBeginImageContext(image.size)
+        image.draw(in: CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height))
+        let rotatedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return rotatedImage ?? image
+    }
+    
+    class func saveToCacheFolder(image: UIImage, compressionQuality: CGFloat = 1) -> String {
+        let identityImage = self.identityImage(image: image)
+        guard let imageData = identityImage.jpegData(compressionQuality: compressionQuality) else {
+            return ""
+        }
+        let filename = FileUtils.tmpFolder().appending("/\(UUID().uuidString).jpg")
+        try? imageData.write(to: URL(fileURLWithPath: filename, isDirectory: false))
+        return "file://\(filename)"
     }
     //TODO 3、图片压缩
 }

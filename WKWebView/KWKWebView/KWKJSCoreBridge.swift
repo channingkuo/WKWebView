@@ -100,6 +100,7 @@ class KWKJSCoreBridge: NSObject {
         
         let type = jsonParams["type"].int ?? 0
         let allowsEditing = jsonParams["allowsEditing"].bool ?? false
+//        let compress = jsonParams["compress"].float ?? 0.8
         let callbackId = params["callbackId"] as! String
         KWKJSCoreBridge.sharedInstance.callbackId = callbackId
         
@@ -164,13 +165,8 @@ class KWKJSCoreBridge: NSObject {
         let phoneNumber = jsonParams["phoneNumber"].string
         
         if nil != phoneNumber && !phoneNumber!.isEmpty {
-            let callWebView = WKWebView()
-            callWebView.load(URLRequest(url: URL(string: "tel:\(phoneNumber!)")!))
-            
-            if #available(iOS 13.0, *) {
-                UIApplication.shared.windows.first{ $0.isKeyWindow }?.addSubview(callWebView)
-            } else {
-                UIApplication.shared.keyWindow?.addSubview(callWebView)
+            if let url = URL(string: "telprompt://\(phoneNumber!)"), UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
         }
     }
@@ -215,17 +211,16 @@ extension KWKJSCoreBridge: UIImagePickerControllerDelegate, UINavigationControll
         }
         
         let encoder = JSONEncoder()
-        let url: NSURL?
         var jsonData: Data? = nil
         if sourceType == UIImagePickerController.SourceType.photoLibrary || sourceType == UIImagePickerController.SourceType.savedPhotosAlbum {
-            url = info[UIImagePickerController.InfoKey.imageURL] as? NSURL
+            let url = info[UIImagePickerController.InfoKey.imageURL] as? NSURL
             #if DEBUG
             print(url?.absoluteString ?? "nil")
             #endif
             jsonData = try? encoder.encode(["url": url!.absoluteString, "base64": ImageUtils.imageToBase64String(image: image)])
         } else if sourceType == UIImagePickerController.SourceType.camera {
-            // TODO 拍照的时候直接存储base64处理数据太大太慢了，存储到cache文件夹中，然后获取url
-            jsonData = try? encoder.encode(["url": ImageUtils.imageToBase64String(image: image, headerSign: true), "base64": ImageUtils.imageToBase64String(image: image)])
+            let path = ImageUtils.saveToCacheFolder(image: image)
+            jsonData = try? encoder.encode(["url": path, "base64": ImageUtils.imageToBase64String(image: ImageUtils.identityImage(image: image))])
         }
         
         let json = String(data: jsonData!, encoding: .utf8)
