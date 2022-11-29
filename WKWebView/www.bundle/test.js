@@ -11,7 +11,7 @@ document.getElementById("sec").innerHTML = new Date();
 localStorage["userInfo"] = JSON.stringify({ token: 'qwertyuioplkjhgfdsazxcvbnm' });
 
 function jSBridgeTest() {
-    kWkJsBridge.test(res => {
+    KWKJSB.test(res => {
         document.getElementById('callback').innerHTML = res;
     })
 }

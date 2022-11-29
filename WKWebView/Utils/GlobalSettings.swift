@@ -111,7 +111,7 @@ class GlobalSetting {
     static var isAllowsBackForwardGestures: Bool {
         get{
             let v = UserDefaults.standard.value(forKey: "isAllowsBackForwardGestures")
-            return v == nil ? true : v as! Bool
+            return v == nil ? false : v as! Bool
         }
         set{
             UserDefaults.standard.set(newValue, forKey: "isAllowsBackForwardGestures")
@@ -166,7 +166,7 @@ class GlobalSetting {
     static var enableWebServer: Bool {
         get{
             let v = UserDefaults.standard.value(forKey: "enableWebServer")
-            return v == nil ? true : v as! Bool
+            return v == nil ? false : v as! Bool
         }
         set{
             UserDefaults.standard.set(newValue, forKey: "enableWebServer")

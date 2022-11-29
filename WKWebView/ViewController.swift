@@ -57,7 +57,7 @@ class ViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(htmlVersionUpdateFailed), name: NSNotification.Name(rawValue: "htmlVersionUpdateFailed"), object: nil)
         
         DispatchQueue.global().async() {
-            WwwUtils.checkHtmlVersion()
+//            WwwUtils.checkHtmlVersion()
         }
     }
     

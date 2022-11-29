@@ -206,10 +206,8 @@ extension KWKJSCoreBridge: UIImagePickerControllerDelegate, UINavigationControll
         picker.dismiss(animated: true, completion: nil)
 
         let image: UIImage
-        let url = info[UIImagePickerController.InfoKey.imageURL] as! NSURL
-        #if DEBUG
-        print(url)
-        #endif
+        let sourceType = picker.sourceType
+        
         if picker.allowsEditing {
             image = info[UIImagePickerController.InfoKey.editedImage] as! UIImage
         } else {
@@ -217,7 +215,19 @@ extension KWKJSCoreBridge: UIImagePickerControllerDelegate, UINavigationControll
         }
         
         let encoder = JSONEncoder()
-        let jsonData = try? encoder.encode(["url": url.absoluteString, "base64": ImageUtils.imageToBase64String(image: image)])
+        let url: NSURL?
+        var jsonData: Data? = nil
+        if sourceType == UIImagePickerController.SourceType.photoLibrary || sourceType == UIImagePickerController.SourceType.savedPhotosAlbum {
+            url = info[UIImagePickerController.InfoKey.imageURL] as? NSURL
+            #if DEBUG
+            print(url?.absoluteString ?? "nil")
+            #endif
+            jsonData = try? encoder.encode(["url": url!.absoluteString, "base64": ImageUtils.imageToBase64String(image: image)])
+        } else if sourceType == UIImagePickerController.SourceType.camera {
+            // TODO 拍照的时候直接存储base64处理数据太大太慢了，存储到cache文件夹中，然后获取url
+            jsonData = try? encoder.encode(["url": ImageUtils.imageToBase64String(image: image, headerSign: true), "base64": ImageUtils.imageToBase64String(image: image)])
+        }
+        
         let json = String(data: jsonData!, encoding: .utf8)
 
         if #available(iOS 14, *) {

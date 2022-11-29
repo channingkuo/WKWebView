@@ -4,7 +4,7 @@ const KWKJSBridge = {
 		var message;
 		var body;
 		var plugin = 'KWKJSCoreBridge';
-		var callbackId = '' + Math.floor(Math.random() * 2000000000);
+		var callbackId = '' + new Date().getTime();
 
 		if (callback) {
 			if (!KWKJSBridgeEvent._listeners[callbackId]) {
