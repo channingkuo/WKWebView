@@ -61,8 +61,9 @@ class KWKWebView: UIView {
         configuretion.processPool = WKProcessPool()
         configuretion.preferences = WKPreferences()
         configuretion.preferences.minimumFontSize = CGFloat(webConfig.minFontSize)
-        configuretion.preferences.javaScriptEnabled = webConfig.isjavaScriptEnabled
         configuretion.preferences.javaScriptCanOpenWindowsAutomatically = webConfig.isAutomaticallyJavaScript
+//        configuretion.preferences.javaScriptEnabled = webConfig.isjavaScriptEnabled
+        configuretion.defaultWebpagePreferences.allowsContentJavaScript = webConfig.isjavaScriptEnabled
         
         kWKJSBridge = KWKJSBridge(webView: self)
         

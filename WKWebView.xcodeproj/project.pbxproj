@@ -677,7 +677,7 @@
 				);
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/incloud/libxml2";
 				INFOPLIST_FILE = WKWebView/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -710,7 +710,7 @@
 				);
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/incloud/libxml2";
 				INFOPLIST_FILE = WKWebView/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

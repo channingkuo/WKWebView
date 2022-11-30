@@ -8,70 +8,73 @@
 import UIKit
 import CoreData
 
+//JPUSHRegisterDelegate
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate, JPUSHRegisterDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        let entity = JPUSHRegisterEntity()
-        entity.types = Int(JPAuthorizationOptions.alert.union(JPAuthorizationOptions.badge).union(JPAuthorizationOptions.sound).union(JPAuthorizationOptions.providesAppNotificationSettings).rawValue)
-        
-        JPUSHService.register(forRemoteNotificationConfig: entity, delegate: self)
-        
-        #if DEBUG
-        JPUSHService.setup(withOption: launchOptions, appKey: "bde096b860e2f33960751d5e", channel: "YSW-CHANNEL", apsForProduction: false)
-        #else
-        JPUSHService.setup(withOption: launchOptions, appKey: "bde096b860e2f33960751d5e", channel: "YSW-CHANNEL", apsForProduction: true)
-        #endif
+        // TODO 极光推送暂不接入
+//        let entity = JPUSHRegisterEntity()
+//        entity.types = Int(JPAuthorizationOptions.alert.union(JPAuthorizationOptions.badge).union(JPAuthorizationOptions.sound).union(JPAuthorizationOptions.providesAppNotificationSettings).rawValue)
+//
+//        JPUSHService.register(forRemoteNotificationConfig: entity, delegate: self)
+//
+//        #if DEBUG
+//        JPUSHService.setup(withOption: launchOptions, appKey: "bde096b860e2f33960751d5e", channel: "YSW-CHANNEL", apsForProduction: false)
+//        #else
+//        JPUSHService.setup(withOption: launchOptions, appKey: "bde096b860e2f33960751d5e", channel: "YSW-CHANNEL", apsForProduction: true)
+//        #endif
         
         FileUtils.setupHtml()
         
         return true
     }
     
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        JPUSHService.registerDeviceToken(deviceToken)
-    }
-    
-    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        debugPrint("did Fail To Register For Remote Notifications With Error: %@", error)
-    }
-    
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        JPUSHService.handleRemoteNotification(userInfo)
-        completionHandler(UIBackgroundFetchResult.newData)
-    }
-        
-    func jpushNotificationCenter(_ center: UNUserNotificationCenter!, willPresent notification: UNNotification!, withCompletionHandler completionHandler: ((Int) -> Void)!) {
-        let userInfo = notification.request.content.userInfo
-        
-        if ((notification.request.trigger?.isKind(of: UNPushNotificationTrigger.self)) != nil) {
-            JPUSHService.handleRemoteNotification(userInfo)
-        }
-        completionHandler(Int(UNNotificationPresentationOptions.alert.rawValue))
-    }
-    
-    func jpushNotificationCenter(_ center: UNUserNotificationCenter!, didReceive response: UNNotificationResponse!, withCompletionHandler completionHandler: (() -> Void)!) {
-        let userInfo = response.notification.request.content.userInfo
-        
-        if ((response.notification.request.trigger?.isKind(of: UNPushNotificationTrigger.self)) != nil) {
-            JPUSHService.handleRemoteNotification(userInfo)
-        }
-        completionHandler()
-    }
-    
-    func jpushNotificationCenter(_ center: UNUserNotificationCenter!, openSettingsFor notification: UNNotification!) {
-        if (notification != nil) && ((notification.request.trigger?.isKind(of: UNPushNotificationTrigger.self)) != nil) {
-            // 从通知界面直接进入应用
-        } else {
-            // 从通知设置界面进入应用
-        }
-    }
-    
-    func jpushNotificationAuthorization(_ status: JPAuthorizationStatus, withInfo info: [AnyHashable : Any]!) {
-        
-    }
+    // MARK: JPush Lifecycle
+//    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+//        JPUSHService.registerDeviceToken(deviceToken)
+//    }
+//
+//    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+//        debugPrint("did Fail To Register For Remote Notifications With Error: %@", error)
+//    }
+//
+//    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+//        JPUSHService.handleRemoteNotification(userInfo)
+//        completionHandler(UIBackgroundFetchResult.newData)
+//    }
+//
+//    func jpushNotificationCenter(_ center: UNUserNotificationCenter!, willPresent notification: UNNotification!, withCompletionHandler completionHandler: ((Int) -> Void)!) {
+//        let userInfo = notification.request.content.userInfo
+//
+//        if ((notification.request.trigger?.isKind(of: UNPushNotificationTrigger.self)) != nil) {
+//            JPUSHService.handleRemoteNotification(userInfo)
+//        }
+//        completionHandler(Int(UNNotificationPresentationOptions.list.rawValue))
+//    }
+//
+//    func jpushNotificationCenter(_ center: UNUserNotificationCenter!, didReceive response: UNNotificationResponse!, withCompletionHandler completionHandler: (() -> Void)!) {
+//        let userInfo = response.notification.request.content.userInfo
+//
+//        if ((response.notification.request.trigger?.isKind(of: UNPushNotificationTrigger.self)) != nil) {
+//            JPUSHService.handleRemoteNotification(userInfo)
+//        }
+//        completionHandler()
+//    }
+//
+//    func jpushNotificationCenter(_ center: UNUserNotificationCenter!, openSettingsFor notification: UNNotification!) {
+//        if (notification != nil) && ((notification.request.trigger?.isKind(of: UNPushNotificationTrigger.self)) != nil) {
+//            // 从通知界面直接进入应用
+//        } else {
+//            // 从通知设置界面进入应用
+//        }
+//    }
+//
+//    func jpushNotificationAuthorization(_ status: JPAuthorizationStatus, withInfo info: [AnyHashable : Any]!) {
+//
+//    }
 
     // MARK: UISceneSession Lifecycle
 

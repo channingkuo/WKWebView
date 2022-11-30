@@ -20,7 +20,7 @@ function openSettings () {
     KWKJSB.openSettings(0);
 }
 function getLocation () {
-    KWKJSB.location(100, resp => {
+    KWKJSB.location(10, resp => {
         console.log(resp);
         document.getElementById('callback').innerHTML = resp;
     });

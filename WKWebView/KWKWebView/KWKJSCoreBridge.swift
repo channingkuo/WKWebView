@@ -23,6 +23,8 @@ class KWKJSCoreBridge: NSObject {
     
     fileprivate var webView: KWKWebView?
     fileprivate var callbackId: String?
+    /// 若被回收则会导致委托不调用，顾不能使用局部变量
+    fileprivate var locationManager: KLocationManager?
     
     @objc func test(_ params: Dictionary<String, Any>, webView: KWKWebView) {
         debugPrint(params)
@@ -73,7 +75,7 @@ class KWKJSCoreBridge: NSObject {
     }
     
     @objc func location(_ params: Dictionary<String, Any>, webView: KWKWebView) {
-        self.webView = webView
+        KWKJSCoreBridge.sharedInstance.webView = webView
         
         let jsonParams = JSON(params["params"] as! Dictionary<String, Any>)
         
@@ -88,9 +90,11 @@ class KWKJSCoreBridge: NSObject {
             rootViewController = UIApplication.shared.keyWindow?.rootViewController
         }
         
-        let locationManager = KLocationManager(rootViewController!, delegate: self)
-        locationManager.delegate = KWKJSCoreBridge.sharedInstance
-        locationManager.startUpdatingLocation(distanceFilter: distance)
+        locationManager = KLocationManager.sharedInstance
+        locationManager?.viewController = rootViewController
+        locationManager?.delegate = KWKJSCoreBridge.sharedInstance
+        locationManager?.didSendLocation = false
+        locationManager?.startUpdatingLocation(distanceFilter: distance)
     }
     
     @objc func choosePhoto(_ params: Dictionary<String, Any>, webView: KWKWebView) {
@@ -183,9 +187,7 @@ extension KWKJSCoreBridge: LocationDelegate {
         let json = String(data: jsonData!, encoding: .utf8)
         
         if #available(iOS 14, *) {
-            if KWKJSCoreBridge.sharedInstance.webView!.replyHandler != nil {
-                KWKJSCoreBridge.sharedInstance.webView!.replyHandler!(json, nil)
-            }
+            KWKJSCoreBridge.sharedInstance.webView!.replyHandler!(json, nil)
         } else {
             if callbackId != nil && !callbackId!.isEmpty {
                 KWKJSCoreBridge.sharedInstance.webView!.excuteJavaScript(javaScript: "KWKJSBridge.callback('\(callbackId ?? "")', '\(json ?? "")');")
@@ -227,9 +229,7 @@ extension KWKJSCoreBridge: UIImagePickerControllerDelegate, UINavigationControll
 
         if #available(iOS 14, *) {
             // 直接返回Promise
-            if KWKJSCoreBridge.sharedInstance.webView!.replyHandler != nil {
-                KWKJSCoreBridge.sharedInstance.webView!.replyHandler!(json, nil)
-            }
+            KWKJSCoreBridge.sharedInstance.webView!.replyHandler!(json, nil)
         } else {
             if callbackId != nil && !callbackId!.isEmpty {
                 KWKJSCoreBridge.sharedInstance.webView!.excuteJavaScript(javaScript: "KWKJSBridge.callback('\(KWKJSCoreBridge.sharedInstance.callbackId ?? "")', '\(json ?? "")');")

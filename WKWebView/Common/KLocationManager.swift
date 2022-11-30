@@ -15,30 +15,25 @@ class KLocationManager: NSObject {
     
     var viewController: UIViewController?
     var delegate: LocationDelegate?
+    var didSendLocation: Bool = true
+    
+    static let sharedInstance: KLocationManager = {
+        let instance = KLocationManager()
+        return instance
+    }()
     
     override init() {
-        locationManager = CLLocationManager()
+        self.locationManager = CLLocationManager()
         
         super.init()
         
-        locationManager.delegate = self
-    }
-    
-    init(_ viewCtrl: UIViewController, delegate: KWKJSCoreBridge) {
-        self.viewController = viewCtrl
-        self.delegate = delegate as LocationDelegate
-        
-        locationManager = CLLocationManager()
-        
-        super.init()
-        
-        locationManager.delegate = self
+        self.locationManager.delegate = self
     }
     
     func startUpdatingLocation(distanceFilter: Double?) {
         self.distanceFilter = distanceFilter
         
-        if CLLocationManager.authorizationStatus() == .denied {
+        if self.locationManager.authorizationStatus == .denied {
             requestAuthorizationAlert()
         } else {
             requestAuthorization()
@@ -46,26 +41,12 @@ class KLocationManager: NSObject {
     }
     
     func requestAuthorization() {
-        // TODO 不知道为什么需要延迟1秒才能正常触发CLLocationManagerDelegate委托方法
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.locationManager.requestWhenInUseAuthorization()
-            self.locationManager.startUpdatingLocation()
-            
-            if CLLocationManager.authorizationStatus() == .notDetermined {
-                self.locationManager.requestWhenInUseAuthorization()
-            }
-            
-            if CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
-                CLLocationManager.authorizationStatus() == .authorizedAlways {
-                
-                self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-                /// distanceFilter 定位精度，默认100米
-                self.locationManager.distanceFilter = self.distanceFilter ?? 100.0
-                
-                self.locationManager.requestWhenInUseAuthorization()
-                self.locationManager.startUpdatingLocation()
-            }
-        }
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        /// distanceFilter 定位精度，默认100米
+        self.locationManager.distanceFilter = self.distanceFilter ?? 100.0
+//        self.locationManager.startMonitoringSignificantLocationChanges()
+        self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.startUpdatingLocation()
     }
     
     func requestAuthorizationAlert() {
@@ -107,7 +88,7 @@ class KLocationManager: NSObject {
 // MARK: - CLLocationManagerDelegate
 extension KLocationManager: CLLocationManagerDelegate {
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         manager.stopUpdatingLocation()
         
         let location = locations.last ?? CLLocation()
@@ -128,23 +109,26 @@ extension KLocationManager: CLLocationManagerDelegate {
                 }
                 #endif
             }
-            self.transferLocation(transformLocation, placemarks: placemarks)
+            if !self.didSendLocation {
+                self.transferLocation(transformLocation, placemarks: placemarks)
+                self.didSendLocation = true
+            }
         })
     }
     
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if status == .notDetermined {
-            requestAuthorization()
-        } else if status == .restricted {
+    public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .restricted {
             requestAuthorizationAlert()
         } else if status == .denied {
             requestAuthorizationAlert()
         } else if status == .authorizedWhenInUse || status == .authorizedAlways {
-            manager.requestLocation()
+
+        } else if status == .notDetermined {
+
         }
     }
         
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+    public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         manager.stopUpdatingLocation()
     }
 }
